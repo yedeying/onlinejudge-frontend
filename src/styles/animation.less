@@ -1,0 +1,120 @@
+@keyframes fadeInDown {
+  from {
+    transform: translate3d(0, -2%, 0);
+
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translate3d(0, 10%, 0);
+
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    visibility: visible;
+
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes slideOutMobile {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fadeInUp {
+  animation-name: fadeInUp;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
+}
+
+.long-animated {
+  animation-duration: 1.5s;
+
+  animation-fill-mode: both;
+}
+
+.animated {
+  animation-duration: 1s;
+
+  animation-fill-mode: both;
+}

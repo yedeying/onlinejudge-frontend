@@ -1,0 +1,11 @@
+dev_server/
+dist/
+node_modules/
+output/
+public/
+src/icons/
+src/fonts/
+src/base64/
+src/widgets/*
+src/icons/svgs/*
+*.d.ts

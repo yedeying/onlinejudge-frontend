@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "paths": {
+      "$root": "src",
+      "$*": [
+        "src/redux/*",
+        "src/*"
+      ]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}
