@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": ".",
+    "jsx": "react",
+    "lib": [
+      "esnext",
+      "es2017.object",
+      "dom"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "newLine": "lf",
+    "removeComments": true,
+    "rootDir": "src",
+    "sourceMap": true,
+    "target": "esnext",
+    "paths": {
+      "$*": [
+        "src/redux/*",
+        "src/*"
+      ]
+    },
+
+    "checkJs": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "include": [
+    "typings/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "config",
+    "bin",
+    "scripts",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.js"
+  ]
+}

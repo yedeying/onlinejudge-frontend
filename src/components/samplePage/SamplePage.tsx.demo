@@ -1,0 +1,28 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setSampleRemote } from '$actions/sample';
+import { selectSampleData } from '$selectors/sample';
+import * as styles from './samplePage.less';
+
+interface SampleProps {
+  setSampleRemote: any;
+  data: any;
+}
+
+const myConnect = connect as any;
+
+@myConnect(
+  { setSampleRemote },
+  (state: any) => ({ data: selectSampleData(state) })
+)
+class SamplePage extends Component<SampleProps, any> {
+  static displayName = 'SamplePage';
+
+  render() {
+    return (
+      <div className={styles.main}>This is a sample page</div>
+    );
+  }
+}
+
+export default SamplePage;
