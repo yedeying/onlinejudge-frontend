@@ -1,13 +1,156 @@
 import * as React from 'react';
+import { Location } from 'history';
+import { connect } from 'react-redux';
+import { Layout, Menu } from 'antd';
+import classnames from 'classnames';
+import { NavKey, SubNavKey } from '$constants/navigation';
+import { Path } from '$constants/route';
+import { Link } from 'react-router-dom';
+import NavItem, { NavItemProps } from './NavItem';
+import { ApplicationState } from '$modules/root';
+import { selectPath } from '$selectors/route';
+import './Navigationbar.less';
 
-const { Component } = React;
+const { PureComponent } = React;
+const { Header } = Layout;
 
-export default class Navigationbar extends Component {
+type NavItemOptions = NavItemProps & { key: string, floatRight?: boolean, subNav?: NavItemOptions[] };
+
+interface StateProps {
+  path: Location<any> | null;
+}
+
+interface NavigationbarProps extends StateProps {}
+
+class Navigationbar extends PureComponent<NavigationbarProps> {
+  navList: NavItemOptions[] = [{
+    key: NavKey.training,
+    route: Path.TRAINING,
+    iconKey: 'user',
+    text: 'Training',
+    subNav: [{
+      key: SubNavKey.problems,
+      route: Path.TRAINING_PROBLEMS,
+      text: 'Problems'
+    }, {
+      key: SubNavKey.status,
+      route: Path.TRAINING_STATUS,
+      text: 'Status'
+    }, {
+      key: SubNavKey.ranklist,
+      route: Path.TRAINING_RANKLIST,
+      text: 'Ranklist'
+    }]
+  }, {
+    key: NavKey.contests,
+    route: Path.CONTESTS,
+    iconKey: 'team',
+    text: 'Contests'
+  }, {
+    key: NavKey.issues,
+    route: Path.ISSUES,
+    iconKey: 'notification',
+    text: 'Issues'
+  }, {
+    key: NavKey.register,
+    route: Path.REGISTER,
+    text: 'Register',
+    floatRight: true
+  }, {
+    key: NavKey.login,
+    route: Path.LOGIN,
+    text: 'Login',
+    floatRight: true
+  }];
+
+  getNavItemProps({ route, iconKey, text }: NavItemOptions): NavItemProps {
+    return { route, iconKey, text };
+  }
+
+  getNavItemClass({ floatRight }: NavItemOptions): string {
+    return classnames('', {
+      'menu-right': floatRight
+    });
+  }
+
+  getActiveNav(): NavItemOptions | null {
+    const { path } = this.props;
+    if (!path) {
+      return null;
+    }
+    const { pathname } = path;
+    for (const navItem of this.navList) {
+      if (pathname.indexOf(navItem.route) === 0) {
+        return navItem;
+      }
+    }
+    return null;
+  }
+
+  getActiveSubNav(): NavItemOptions | null {
+    const { path } = this.props;
+    if (!path) {
+      return null;
+    }
+    const { pathname } = path;
+    const activeNav = this.getActiveNav();
+    if (!activeNav || !activeNav.subNav) {
+      return null;
+    }
+    for (const navItem of activeNav.subNav) {
+      if (pathname.indexOf(navItem.route) === 0) {
+        return navItem;
+      }
+    }
+    return null;
+  }
+
   render() {
+    const activeNav = this.getActiveNav();
+    const subNavList = activeNav && activeNav.subNav || null;
+    const activeSubNav = this.getActiveSubNav();
     return (
-      <div>
-        Navigation
-      </div>
+      <Header className="header">
+        <div className="header-wrap">
+          <div className="main-nav">
+            <div className="brand">
+              <Link to={Path.ROOT}>OnlineJudge</Link>
+            </div>
+            <Menu
+              className="top-menu"
+              theme="dark"
+              mode="horizontal"
+              selectedKeys={activeNav ? [activeNav.key] : []}
+            >
+              {this.navList.map((nav: NavItemOptions) => (
+                <Menu.Item className={this.getNavItemClass(nav)} key={nav.key}>
+                  <NavItem {...this.getNavItemProps(nav)} />
+                </Menu.Item>
+              ))}
+            </Menu>
+          </div>
+          {subNavList && <div className="sub-nav">
+            <Menu
+              className="sub-menu"
+              theme="dark"
+              mode="horizontal"
+              selectedKeys={activeSubNav ? [activeSubNav.key] : []}
+            >
+              {subNavList.map((nav: NavItemOptions) => (
+                <Menu.Item className={this.getNavItemClass(nav)} key={nav.key}>
+                  <NavItem {...this.getNavItemProps(nav)} />
+                </Menu.Item>
+              ))}
+            </Menu>
+          </div>}
+        </div>
+      </Header>
     );
   }
 }
+
+export default connect<StateProps, {}, {}, ApplicationState>(
+  (state: ApplicationState): StateProps => ({
+    path: selectPath(state)
+  })
+)(Navigationbar);

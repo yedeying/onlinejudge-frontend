@@ -1,9 +1,13 @@
-import { combineReducers } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 import { combineEpics } from 'redux-observable';
-import { routerReducer } from 'react-router-redux';
+import { routerReducer, RouterState } from 'react-router-redux';
 
 export const rootEpic = combineEpics();
 
-export const rootReducer = combineReducers({
+export interface ApplicationState {
+  readonly router: RouterState;
+}
+
+export const rootReducer: Reducer<ApplicationState> = combineReducers({
   router: routerReducer
 });
