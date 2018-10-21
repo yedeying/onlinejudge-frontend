@@ -17,7 +17,7 @@ const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const project = require('../config/project');
 const config = require('../config/webpack.config.dev');
 const createDevServerConfig = require('../config/webpack_dev_server.config');
-const isInteractive = process.stdout.isTTY;
+const isInteractive = true;
 
 const DEFAULT_PORT = project.server_port;
 const HOST = project.server_host;

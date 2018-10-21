@@ -1,0 +1,46 @@
+@wrapWidth: 1024px;
+.header {
+  &.ant-layout-header {
+    display: flex;
+    height: auto;
+    line-height: 1.5;
+    padding: 0;
+  }
+}
+
+.header-wrap {
+  width: @wrapWidth;
+  margin: auto;
+}
+
+.main-nav, .sub-nav {
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  color: #fff;
+  padding: 8px;
+  font-size: 20px;
+  font-weight: 500;
+  a {
+    color: #fff;
+    text-decoration: none !important;
+    &:hover {
+      color: fade(#fff, 80%);
+    }
+  }
+}
+
+.top-menu, .sub-menu {
+  flex-grow: 1;
+  &.ant-menu.ant-menu-dark {
+    .ant-menu-item-selected {
+      background-color: transparent;
+    }
+  }
+}
+
+.menu-right {
+  float: right;
+}
