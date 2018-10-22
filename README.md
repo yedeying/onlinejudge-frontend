@@ -1,2 +1,2 @@
 # onlinejudge frontend
-yarn & yarn start
+### yarn & yarn start
