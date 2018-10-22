@@ -45,7 +45,24 @@ class Navigationbar extends PureComponent<NavigationbarProps> {
     key: NavKey.contests,
     route: Path.CONTESTS,
     iconKey: 'team',
-    text: 'Contests'
+    text: 'Contests',
+    subNav: [{
+      key: SubNavKey.problems,
+      route: Path.CONTESTS_PROBLEMS,
+      text: 'Problems'
+    }, {
+      key: SubNavKey.status,
+      route: Path.CONTESTS_STATUS,
+      text: 'Status'
+    }, {
+      key: SubNavKey.ranklist,
+      route: Path.CONTESTS_RANKLIST,
+      text: 'Ranklist'
+    }, {
+      key: SubNavKey.statistics,
+      route: Path.CONTESTS_STATISTICS,
+      text: 'Statistics'
+    }]
   }, {
     key: NavKey.issues,
     route: Path.ISSUES,
@@ -87,6 +104,16 @@ class Navigationbar extends PureComponent<NavigationbarProps> {
     return null;
   }
 
+  getSubNav(activeNav: NavItemOptions | null): NavItemOptions[] {
+    if (!activeNav || !activeNav.subNav) {
+      return [];
+    }
+    if (activeNav.key === NavKey.contests && false) {
+      return [];
+    }
+    return activeNav.subNav;
+  }
+
   getActiveSubNav(): NavItemOptions | null {
     const { path } = this.props;
     if (!path) {
@@ -107,12 +134,12 @@ class Navigationbar extends PureComponent<NavigationbarProps> {
 
   render() {
     const activeNav = this.getActiveNav();
-    const subNavList = activeNav && activeNav.subNav || null;
+    const subNavList = this.getSubNav(activeNav);
     const activeSubNav = this.getActiveSubNav();
     return (
       <Header className="header">
-        <div className="header-wrap">
-          <div className="main-nav">
+        <div className="main-nav">
+          <div className="header-wrapper">
             <div className="brand">
               <Link to={Path.ROOT}>OnlineJudge</Link>
             </div>
@@ -129,7 +156,9 @@ class Navigationbar extends PureComponent<NavigationbarProps> {
               ))}
             </Menu>
           </div>
-          {subNavList && <div className="sub-nav">
+        </div>
+        {subNavList.length > 0 && <div className="sub-nav">
+          <div className="header-wrapper">
             <Menu
               className="sub-menu"
               theme="dark"
@@ -142,8 +171,8 @@ class Navigationbar extends PureComponent<NavigationbarProps> {
                 </Menu.Item>
               ))}
             </Menu>
-          </div>}
-        </div>
+          </div>
+        </div>}
       </Header>
     );
   }

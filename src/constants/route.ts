@@ -7,7 +7,11 @@ export enum Path {
   REGISTER = '/register',
   TRAINING_PROBLEMS = '/training/problems',
   TRAINING_STATUS = '/training/status',
-  TRAINING_RANKLIST = '/training/ranklist'
+  TRAINING_RANKLIST = '/training/ranklist',
+  CONTESTS_PROBLEMS = '/contests/:id/problems',
+  CONTESTS_STATUS = '/contests/:id/status',
+  CONTESTS_RANKLIST = '/contests/:id/ranklist',
+  CONTESTS_STATISTICS = '/contests/:id/statistics'
 }
 
 export enum URL {
@@ -19,5 +23,9 @@ export enum URL {
   REGISTER = '/register',
   TRAINING_PROBLEMS = '/training/problems',
   TRAINING_STATUS = '/training/status',
-  TRAINING_RANKLIST = '/training/ranklist'
+  TRAINING_RANKLIST = '/training/ranklist',
+  CONTESTS_PROBLEMS = '/contests/:id/problems',
+  CONTESTS_STATUS = '/contests/:id/status',
+  CONTESTS_RANKLIST = '/contests/:id/ranklist',
+  CONTESTS_STATISTICS = '/contests/:id/statistics'
 }
