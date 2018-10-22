@@ -1,21 +1,33 @@
 @wrapWidth: 1024px;
+@navColor: #001529;
+@subNavColor: #001d38;
 .header {
   &.ant-layout-header {
-    display: flex;
     height: auto;
     line-height: 1.5;
     padding: 0;
   }
 }
 
-.header-wrap {
+.header-wrapper {
+  display: flex;
+  align-items: center;
   width: @wrapWidth;
   margin: auto;
 }
 
-.main-nav, .sub-nav {
-  display: flex;
-  align-items: center;
+.sub-nav {
+  background-color: @subNavColor;
+  .ant-menu-dark {
+    background-color: @subNavColor;
+    .ant-menu-item-selected {
+      background-color: @navColor !important;
+    }
+  }
+  a {
+    min-width: 60px;
+    text-align: center;
+  }
 }
 
 .brand {
