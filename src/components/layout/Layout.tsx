@@ -7,6 +7,8 @@ import Navigationbar from '../navigationbar';
 import Footer from '../footer';
 import './Layout.less';
 
+import ProblemList from '../problemList';
+
 const { Content } = Layout;
 const { Component } = React;
 // import { route } from '$constants';
@@ -29,6 +31,7 @@ class AppLayout extends Component {
       <Content>
         <Route exact path={Path.ROOT} render={() => <Redirect to={Path.TRAINING} />} />
         <Route exact path={Path.TRAINING} render={() => <Redirect to={Path.TRAINING_PROBLEMS} />} />
+        <Route exact path={Path.TRAINING_PROBLEMS} render={() => <ProblemList />} />
       </Content>
       <Footer />
     </Layout>);
