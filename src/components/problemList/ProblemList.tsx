@@ -5,11 +5,6 @@ import * as React from 'react';
 const { Component } = React;
 
 class ProblemList extends Component {
-
-  // constructor(props) {
-  //   super(props);
-  // }
-
   render() {
     return (
       <div>
@@ -17,8 +12,6 @@ class ProblemList extends Component {
       </div>
     );
   }
-
 }
 
 export default ProblemList;
-  
