@@ -76,11 +76,13 @@
     "@types/qs": "^6.5.1",
     "@types/react": "^16.4.14",
     "@types/react-dom": "^16.0.7",
+    "@types/react-loadable": "^5.4.1",
     "@types/react-redux": "^6.0.9",
     "@types/react-router": "^4.0.31",
     "@types/react-router-dom": "^4.3.1",
     "@types/react-router-redux": "^5.0.16",
     "@types/redux-actions": "^2.3.0",
+    "@types/redux-immutable": "^4.0.0",
     "@types/redux-mock-store": "^1.0.0",
     "autoprefixer": "^9.1.5",
     "babel-eslint": "^9.0.0",
@@ -141,6 +143,7 @@
     "axios": "^0.18.0",
     "chalk": "^2.4.1",
     "classnames": "^2.2.6",
+    "connected-react-router": "^4.5.0",
     "core-js": "^2.5.7",
     "crypto-js": "^3.1.9-1",
     "history": "^4.7.2",
@@ -162,6 +165,7 @@
     "redux-observable": "^1.0.0",
     "reselect": "^3.0.1",
     "rxjs": "^6.3.3",
+    "typesafe-actions": "^2.0.4",
     "utility-types": "^2.1.0"
   }
 }

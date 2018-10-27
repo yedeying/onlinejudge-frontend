@@ -16,13 +16,13 @@ const { Header } = Layout;
 
 type NavItemOptions = NavItemProps & { key: string, floatRight?: boolean, subNav?: NavItemOptions[] };
 
-interface StateProps {
+interface IStateProps {
   path: Location<any> | null;
 }
 
-interface NavigationbarProps extends StateProps {}
+interface INavigationbarProps extends IStateProps {}
 
-class Navigationbar extends PureComponent<NavigationbarProps> {
+class Navigationbar extends PureComponent<INavigationbarProps> {
   navList: NavItemOptions[] = [{
     key: NavKey.training,
     route: Path.TRAINING,
@@ -178,8 +178,8 @@ class Navigationbar extends PureComponent<NavigationbarProps> {
   }
 }
 
-export default connect<StateProps, {}, {}, ApplicationState>(
-  (state: ApplicationState): StateProps => ({
+export default connect<IStateProps, {}, {}, ApplicationState>(
+  (state: ApplicationState): IStateProps => ({
     path: selectPath(state)
   })
 )(Navigationbar);
