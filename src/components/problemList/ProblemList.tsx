@@ -1,17 +1,33 @@
 import * as React from 'react';
-// import { connect } from 'react-redux';
-// import { selectPath } from '$selectors/route';
+import { List } from 'immutable';
+import { ApplicationState } from '../../redux/modules/root';
+import { IProblemItem } from '../../redux/modules/training';
+import { selectProblemList } from '$selectors/problemList';
+import { connect } from 'react-redux';
 
-const { Component } = React;
+const { PureComponent } = React;
 
-class ProblemList extends Component {
+interface IStateProps {
+  problemList: List<IProblemItem>;
+}
+
+interface IProblemListProps extends IStateProps {}
+
+class ProblemList extends PureComponent<IProblemListProps> {
   render() {
+    const { problemList } = this.props;
     return (
       <div>
-        <p>从没见过如此厚颜无耻之徒</p>
+        test + {JSON.stringify(problemList)}
       </div>
     );
   }
 }
 
-export default ProblemList;
+const mapPropsToState = ((state: ApplicationState): IStateProps => ({
+  problemList: selectProblemList(state)
+}));
+
+export default connect<IStateProps, {}, {}, ApplicationState>(
+  mapPropsToState
+)(ProblemList);

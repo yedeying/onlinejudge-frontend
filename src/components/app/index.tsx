@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Store } from 'redux';
 import { History } from 'history';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router/immutable';
 import Layout from '../../components/layout';
 
 const { Component } = React;
