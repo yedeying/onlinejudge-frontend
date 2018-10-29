@@ -1,4 +1,4 @@
-export const METHOD = {
+export const method = {
   POST: 'post',
   GET: 'get'
 };
@@ -9,10 +9,11 @@ export const METHOD = {
 export const API_BASE = '/api';
 
 /**
- * ===============MODULE==================
+ * ===============TRAINING==================
  */
-export const MODULE = `${API_BASE}/module`;
+export const TRAINING = `${API_BASE}/training`;
 
-export const GET_MODULE_FUNC = `${MODULE}/func`;
-
-// export const POST_SET_SAMPLE = '/sample/remote';
+export const training = {
+  FETCH_NO_LIST: `${TRAINING}/noList`,
+  FETCH_PROBLEM_LIST: `${TRAINING}/problemList/:pageId`
+};

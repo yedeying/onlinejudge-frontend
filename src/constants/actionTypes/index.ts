@@ -1,14 +1,14 @@
-import { SUFFIX } from './util';
-// import { decorateActionType } from './util';
+import { SUFFIX, FETCH } from './util';
+import { decorateActionType } from './util';
 
-const actionTypes = {
-  // sample: {
-  //   SET_SAMPLE: 'SET_SAMPLE',
-  //   ...decorateActionType('SET_SAMPLE_REMOTE', false)
-  // },
+const actionTypes: { [key: string]: { [key: string]: string } } = {
+  training: {
+    ...decorateActionType('TRAINING_NO_LIST'),
+    ...decorateActionType('PROBLEM_LIST')
+  },
   suffix: SUFFIX,
   prefix: {
-    FETCH: 'FETCH_'
+    FETCH
   }
 };
 
