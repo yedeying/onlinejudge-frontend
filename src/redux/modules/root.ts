@@ -3,9 +3,11 @@ import { combineReducers } from 'redux-immutable';
 import { combineEpics } from 'redux-observable';
 import { ActionType } from 'typesafe-actions';
 import { RouterState, routerReducer } from './router';
-import { trainingReducer, ITrainingState } from './training';
+import { trainingReducer, trainingEpic, ITrainingState } from './training';
 
-export const rootEpic = combineEpics();
+export const rootEpic = combineEpics(
+  trainingEpic
+);
 
 export interface IApplicationState {
   readonly router: RouterState;

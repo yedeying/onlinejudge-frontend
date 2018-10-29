@@ -8,7 +8,7 @@ export const SUFFIX = {
 
 const _emptyObj = {};
 
-export function decorateActionType(type: string, withPrefix: boolean = true): object {
+export function decorateActionType(type: string, withPrefix: boolean = true): { [key: string]: string } {
   if (typeof type !== 'string') {
     throw Error('type should be string');
   }

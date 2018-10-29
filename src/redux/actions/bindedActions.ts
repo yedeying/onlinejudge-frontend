@@ -1,10 +1,10 @@
-import store from '$store';
+import store from '../store';
 import { bindActionCreators } from 'redux';
-// import * as sampleActions from './sample';
+import * as training from './training';
 
 export default bindActionCreators(
   {
-    // ...sampleActions,
+    ...training,
   },
   store.dispatch
 );
