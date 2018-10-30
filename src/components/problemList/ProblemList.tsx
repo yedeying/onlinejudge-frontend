@@ -36,9 +36,9 @@ class ProblemList extends PureComponent<IProblemListProps> {
   }
 }
 
-const mapPropsToState = ((state: ApplicationState): IStateProps => ({
+const mapPropsToState = (state: ApplicationState): IStateProps => ({
   problemList: selectProblemList(state)
-}));
+});
 
 export default connect<IStateProps, {}, {}, ApplicationState>(
   mapPropsToState

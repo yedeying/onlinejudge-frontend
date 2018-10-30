@@ -18,7 +18,7 @@ const mockProblemItem: IProblemItem = {
   id: 101,
   no: 'A00',
   title: 'A + B'
-}
+};
 
 export type TrainingAction = ActionType<{}>;
 
@@ -32,5 +32,5 @@ export interface ITrainingState {
 }
 
 export const trainingReducer = combineReducers<ITrainingState, TrainingAction>({
-  problemList: problemList
+  problemList
 });
