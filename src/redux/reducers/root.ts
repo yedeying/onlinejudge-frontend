@@ -1,13 +1,8 @@
 import { Map } from 'immutable';
 import { combineReducers } from 'redux-immutable';
-import { combineEpics } from 'redux-observable';
 import { ActionType } from 'typesafe-actions';
 import { RouterState, routerReducer } from './router';
-import { trainingReducer, trainingEpic, ITrainingState } from './training';
-
-export const rootEpic = combineEpics(
-  trainingEpic
-);
+import { trainingReducer, ITrainingState } from './training';
 
 export interface IApplicationState {
   readonly router: RouterState;

@@ -1,7 +1,7 @@
-export const method = {
-  POST: 'post',
-  GET: 'get'
-};
+export enum Method {
+  POST = 'post',
+  GET = 'get'
+}
 
 /**
  * ===============API BASE================
