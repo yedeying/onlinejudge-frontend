@@ -9,6 +9,11 @@ export interface IProblemItem {
   title: string;
 }
 
+export interface IProblemTypeItem {
+  id: number;
+  title: string;
+}
+
 const mockProblemItem: IProblemItem = {
   id: 101,
   no: 'A00',
