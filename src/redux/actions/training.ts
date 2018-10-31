@@ -4,7 +4,7 @@ import { REQUEST } from '../../constants/common';
 
 export const trainingEpic = action$ => action$.pipe(
   ofType('FETCH_NO_LIST')
-)
+);
 
 export const fetchNoList = () => ({
   type: actionTypes.training.FETCH_NO_LIST,
@@ -12,8 +12,8 @@ export const fetchNoList = () => ({
     url: apiUrls.training.FETCH_NO_LIST,
     method: apiUrls.method.POST,
     data: {},
-    options: { transformResponse: (response: { [key: string]: any }) => ({ ...response }) },
-  },
+    options: { transformResponse: (response: { [key: string]: any }) => ({ ...response }) }
+  }
 });
 
 export const fetchProblemList = (pageId: number) => ({
@@ -23,6 +23,6 @@ export const fetchProblemList = (pageId: number) => ({
     url: apiUrls.training.FETCH_PROBLEM_LIST,
     method: apiUrls.training.FETCH_PROBLEM_LIST,
     data: { pageId },
-    options: { transformResponse: (response: { [key: string]: any }) => ({ ...response, pageId }) },
+    options: { transformResponse: (response: { [key: string]: any }) => ({ ...response, pageId }) }
   }
 });

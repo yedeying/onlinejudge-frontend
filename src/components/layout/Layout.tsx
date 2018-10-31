@@ -5,7 +5,7 @@ import { Layout } from 'antd';
 import { Path } from '$constants/route';
 import Navigationbar from '../navigationbar';
 import Footer from '../footer';
-import ProblemList from '../problemList';
+import Dashboard from '../dashboard';
 import './Layout.less';
 
 const { Content } = Layout;
@@ -26,7 +26,7 @@ class AppLayout extends Component {
         <Content>
           <Route exact path={Path.ROOT} render={() => <Redirect to={Path.TRAINING} />} />
           <Route exact path={Path.TRAINING} render={() => <Redirect to={Path.TRAINING_PROBLEMS} />} />
-          <Route exact path={Path.TRAINING_PROBLEMS} render={() => <ProblemList />} />
+          <Route exact path={Path.TRAINING_PROBLEMS} render={() => <Dashboard />} />
         </Content>
         <Footer />
       </Layout>

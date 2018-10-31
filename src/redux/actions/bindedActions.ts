@@ -4,7 +4,7 @@ import * as training from './training';
 
 export default bindActionCreators(
   {
-    ...training,
+    ...training
   },
   store.dispatch
 );
