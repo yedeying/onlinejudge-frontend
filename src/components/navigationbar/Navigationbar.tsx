@@ -108,7 +108,7 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
     if (!activeNav || !activeNav.subNav) {
       return [];
     }
-    if (activeNav.key === NavKey.contests && false) {
+    if (activeNav.key === NavKey.contests) {
       return [];
     }
     return activeNav.subNav;
