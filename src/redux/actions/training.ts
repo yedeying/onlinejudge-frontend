@@ -2,10 +2,6 @@ import { ofType } from 'redux-observable';
 import { actionTypes, apiUrls } from '../../constants';
 import { REQUEST } from '../../constants/common';
 
-export const trainingEpic = action$ => action$.pipe(
-  ofType('FETCH_NO_LIST')
-);
-
 export const fetchNoList = () => ({
   type: actionTypes.training.FETCH_NO_LIST,
   [REQUEST]: {
