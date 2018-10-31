@@ -1,5 +1,4 @@
-import { SUFFIX, FETCH } from './util';
-import { decorateActionType } from './util';
+import { SUFFIX, FETCH, decorateActionType } from './util';
 
 const actionTypes: { [key: string]: { [key: string]: string } } = {
   training: {
