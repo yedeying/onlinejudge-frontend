@@ -1,11 +1,8 @@
 {
-  "name": "redux-ts-startkit-ye",
+  "name": "onlinejudge-frontend",
   "version": "1.0.0",
-  "description": "redux with typescript startkit for ye",
-  "main": "index.js",
-  "bin": {
-    "redux-startkit-ye": "build.js"
-  },
+  "description": "frontend build with react redux ts, for onlinejudge",
+  "main": "src/index.tsx",
   "scripts": {
     "clean": "rimraf dist",
     "lint": "eslint --ext=.js,.ts,.tsx bin config src",
@@ -32,20 +29,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yedeying999/redux-ts-startkit-ye.git"
+    "url": "git+https://github.com/yedeying999/onlinejudge-frontend.git"
   },
   "keywords": [
-    "redux",
-    "react",
+    "onlinejudge",
+    "frontend",
     "typescript",
-    "startkit"
+    "redux",
+    "observable"
   ],
   "author": "Deying Ye",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yedeying999/redux-ts-startkit-ye/issues"
+    "url": "https://github.com/yedeying999/onlinejudge-frontend/issues"
   },
-  "homepage": "https://github.com/yedeying999/redux-ts-startkit-ye#readme",
+  "homepage": "https://github.com/yedeying999/onlinejudge-frontend#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
