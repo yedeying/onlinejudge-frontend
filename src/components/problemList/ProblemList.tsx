@@ -4,8 +4,10 @@ import { ApplicationState } from '../../redux/modules/root';
 import { IProblemItem } from '../../redux/modules/training';
 import { selectProblemList } from '$selectors/problemList';
 import { connect } from 'react-redux';
+import { Tabs } from 'antd';
 
 const { PureComponent } = React;
+const TabPane = Tabs.TabPane;
 
 interface IStateProps {
   problemList: List<IProblemItem>;

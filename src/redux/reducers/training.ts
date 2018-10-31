@@ -10,6 +10,12 @@ export interface IProblemItem {
   title: string;
 }
 
+export interface IProblemNoItem {
+  id: string;
+  title: string;
+}
+
+// mock 数据
 const mockProblemItem: IProblemItem = {
   id: 101,
   no: 'A00',
@@ -23,10 +29,20 @@ const problemList: Reducer<List<IProblemItem>, TrainingAction> = () => {
   return List([mockProblemItem]);
 };
 
+const problemNoList: Reducer<List<IProblemNoItem>, TrainingAction> = () => {
+  return List([
+    { id: 'A', title: 'A' },
+    { id: 'B', title: 'B' },
+    { id: 'C', title: 'C' }
+  ]);
+};
+
 export interface ITrainingState {
   readonly problemList: List<IProblemItem>;
+  readonly problemNoList: List<IProblemNoItem>;
 }
 
 export const trainingReducer = combineReducers<ITrainingState, TrainingAction>({
-  problemList
+  problemList,
+  problemNoList
 });

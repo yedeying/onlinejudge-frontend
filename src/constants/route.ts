@@ -1,3 +1,4 @@
+// 路由
 export enum Path {
   ROOT = '/',
   TRAINING = '/training',
@@ -14,6 +15,7 @@ export enum Path {
   CONTESTS_STATISTICS = '/contests/:id/statistics'
 }
 
+// 请求
 export enum URL {
   ROOT = '/',
   TRAINING = '/training',
