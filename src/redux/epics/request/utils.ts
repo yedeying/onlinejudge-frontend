@@ -1,14 +1,7 @@
-import { Action } from 'redux';
-import { AxiosRequestConfig } from 'axios';
-import { PayloadAction } from '../../types';
-import { REQUEST } from '../../../constants/common';
-import { actionTypes } from '../../../constants';
+import { Action, RequestConfig, Request, Response, RequestAction, RequestError, ErrorAction } from '../../types';
+import { apiUrls, common, actionTypes } from '../../../constants';
 
-export const isRequestAction = (action: Action) => {
-  return !!action[REQUEST];
-};
-
-export function getActionTypes(action: PayloadAction) {
+export function getActionTypes(action: RequestAction) {
   const startSuffix = actionTypes.suffix.START;
   const successSuffix = actionTypes.suffix.SUCCESS;
   const failSuffix = actionTypes.suffix.FAIL;
@@ -27,75 +20,85 @@ export function getActionTypes(action: PayloadAction) {
   }
 }
 
+function _getRequestDataKey(method: string): string {
+  switch (method) {
+    case apiUrls.Method.GET:
+      return 'params';
+    case apiUrls.Method.POST:
+      return 'data';
+    default:
+      return 'params';
+  }
+}
+
+export function getRequestConfig(action: RequestAction): Request {
+  return action[common.REQUEST];
+}
+
+export function getRequestData(action: RequestAction): { [key: string]: any } {
+  const config = getRequestConfig(action);
+  if (!config) {
+    return {};
+  }
+  const methodKey = _getRequestDataKey(config.method);
+  const requestData = config[methodKey];
+  return requestData || {};
+}
+
 export const requestActions = {
-  start: (action: PayloadAction): PayloadAction => {
+  start: (action: RequestAction): Action => {
     const requestData = getRequestData(action);
     return {
       type: getActionTypes(action).start,
       payload: { ...action.payload, ...requestData },
-      meta: { isLoading: true, previousAction: action },
+      meta: { isLoading: true, previousAction: action }
     };
   },
 
-  success: (action: PayloadAction, response: any): PayloadAction => {
-    let payload = action.payload;
-    // 抽离meta 和 真正的 response
-    const { data, meta } = response;
-    const actionOptions = getActionOptions(action);
-    // 与response无关，单纯的就原有 payload 进行 requestData 的 merge.
-    if (actionOptions && actionOptions.injectRequestData) {
-      payload = getRequestDataMergedPayload(action);
-    }
-    // 获取转换后的response，与payload无关
-    if (isRequestAction(action)) {
-      response = getTransformedResponse(data, action);
-    }
-    // 聚合数据: { ...合并(?)requestData 的 payload，...转化(?)后的response }
-    const finalPayload = payload ? { ...payload, ...response } : response;
+  success: (action: RequestAction, response: Response): Action => {
+    const payload = action.payload;
+    const { meta } = action;
+    const { data } = response;
     return {
-      type: getActionTypes(action, actionOptions).success,
-      payload: finalPayload,
+      type: getActionTypes(action).success,
+      payload: { ...payload, ...response },
       meta: {
         ...meta,
         isLoading: false,
-        previousAction: action,
-      },
+        previousAction: action
+      }
     };
   },
-  fail: (action: PayloadAction, error: any): ErrorAction => {
-    let response = {};
-    if (isRequestAction(action)) {
-      response = getTransformedResponse(response, action);
-    }
-    const actionOptions = getActionOptions(action);
+
+  fail: (action: RequestAction, error: RequestError): ErrorAction => {
+    const response = {};
     const requestData = getRequestData(action);
 
     // 约定：
     // 注意在reducer中handle的时候我们需要去action.error里获取错误信息
     // 而在payload中拿取请求参数
     return {
-      type: getActionTypes(action, actionOptions).fail,
+      type: getActionTypes(action).fail,
       error,
       payload: { ...action.payload, ...requestData, ...response },
       meta: {
         previousAction: action,
         isLoading: false,
-        isError: true,
-      },
+        isError: true
+      }
     };
   },
-  cancel: (action: PayloadAction): Action => {
-    const actionOptions = getActionOptions(action);
+
+  cancel: (action: RequestAction): Action => {
     const requestData = getRequestData(action);
-    const abortOn = getAbortOn(action);
     return {
-      type: getActionTypes(action, actionOptions).cancel,
-      payload: { ...requestData, abortOn },
+      type: getActionTypes(action).cancel,
+      payload: { ...requestData },
       meta: {
         previousAction: action,
         isLoading: false,
-        isError: false,
-      },
+        isError: false
+      }
     };
-  },
+  }
 };
