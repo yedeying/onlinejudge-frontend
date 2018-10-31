@@ -1,38 +1,34 @@
-import { Action } from 'redux';
 import { Observable, Observer } from 'rxjs';
 import { Epic } from 'redux-observable';
 import { filter, switchMap } from 'rxjs/operators';
-import { PayloadAction } from '../../types';
-import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
-import { isRequestAction, requestActions } from './utils';
+import { RequestConfig, Response, RequestError, Action, RequestAction, isRequestAction } from '../../types';
+import { requestActions } from './utils';
 import { REQUEST } from '../../../constants/common';
 import { Method } from '../../../constants/apiUrls';
 import { request } from '../../../services/api';
 
-export const fetchRequest = (action: PayloadAction) => new Observable((observer: Observer<PayloadAction>) => {
-  const requestOption: AxiosRequestConfig = action[REQUEST];
-  const { url } = requestOption;
-  const method = requestOption.method || Method.GET;
+export const fetchRequest = (action: RequestAction) => new Observable((observer: Observer<Action>) => {
+  const requestOption: RequestConfig = action[REQUEST];
 
   const requestConfig = {
     method: Method.GET,
     ...requestOption
   };
   observer.next(requestActions.start(action));
-  const requestInstance = request(requestConfig)
-    .then((response: AxiosResponse) => {
-      observer.next(response);
+  request(requestConfig)
+    .then((response: Response) => {
+      observer.next(requestActions.success(action, response));
       observer.complete();
     })
-    .catch((e: AxiosError) => {
-      observer.error(e);
+    .catch((e: RequestError) => {
+      observer.next(requestActions.fail(action, e));
     });
-  return () => requestInstance.cancel();
+  return () => requestActions.cancel(action);
 });
 
-export const requestEpic: Epic<PayloadAction> = (action$: Observable<PayloadAction>) => action$.pipe(
-  filter((action: PayloadAction) => isRequestAction(action)),
-  switchMap((action: PayloadAction) => {
+export const requestEpic: Epic<Action> = (action$: Observable<Action>) => action$.pipe(
+  filter((action: Action) => isRequestAction(action)),
+  switchMap((action: RequestAction) => {
     return fetchRequest(action);
   })
 );
