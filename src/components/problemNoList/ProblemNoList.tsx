@@ -6,7 +6,7 @@ import { IProblemNoItem } from '../../redux/reducers/training';
 import { AppState } from '../../redux/types';
 import { selectProblemNoList } from '../../redux/selectors/problemList';
 
-const { PureComponent, Fragment } = React;
+const { PureComponent } = React;
 const TabPane = Tabs.TabPane;
 
 interface IStateProps {
@@ -19,13 +19,17 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
   render() {
     const { problemNoList } = this.props;
     return (
-      <Fragment>
-        {problemNoList.map(item => {
+      <Tabs
+        defaultActiveKey="1"
+        tabPosition="top"
+        style={{ height: 220 }}
+      >
+        {problemNoList.toJS().map((no: IProblemNoItem) => {
           return (
-            <TabPane tab={item.id} key={item.id}>{item.title}</TabPane>
+            <TabPane tab={no.id} key={no.id}>{no.title}</TabPane>
           );
         })}
-      </Fragment>
+      </Tabs>
     );
   }
 }
