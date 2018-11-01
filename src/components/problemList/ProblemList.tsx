@@ -18,7 +18,6 @@ interface IProblemListProps extends IStateProps {}
 class ProblemList extends PureComponent<IProblemListProps> {
   render() {
     const { problemList } = this.props;
-    console.log('22', problemList.toJS())
     return (
       <div>
         test + {JSON.stringify(problemList)}
