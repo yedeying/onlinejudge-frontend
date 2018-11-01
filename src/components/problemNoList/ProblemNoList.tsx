@@ -18,7 +18,6 @@ interface IProblemNoListProps extends IStateProps {}
 class ProblemNoList extends PureComponent<IProblemNoListProps> {
   render() {
     const { problemNoList } = this.props;
-    console.log('ss', problemNoList.toJS());
     return (
       <Tabs
         defaultActiveKey="1"
