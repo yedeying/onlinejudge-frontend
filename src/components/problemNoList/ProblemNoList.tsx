@@ -2,9 +2,9 @@ import * as React from 'react';
 import { List } from 'immutable';
 import { connect } from 'react-redux';
 import { Tabs } from 'antd';
-import { IProblemNoItem } from '../../redux/modules/training';
-import { ApplicationState } from '../../redux/modules/root';
-import { selectProblemNoList } from '$selectors/problemList';
+import { IProblemNoItem } from '../../redux/reducers/training';
+import { AppState } from '../../redux/types';
+import { selectProblemNoList } from '../../redux/selectors/problemList';
 
 const { PureComponent, Fragment } = React;
 const TabPane = Tabs.TabPane;
@@ -30,10 +30,10 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
   }
 }
 
-const mapPropsToState = (state: ApplicationState): IStateProps => ({
+const mapPropsToState = (state: AppState): IStateProps => ({
   problemNoList: selectProblemNoList(state)
 });
 
-export default connect<IStateProps, {}, {}, ApplicationState>(
+export default connect<IStateProps, {}, {}, AppState>(
   mapPropsToState
 )(ProblemNoList);

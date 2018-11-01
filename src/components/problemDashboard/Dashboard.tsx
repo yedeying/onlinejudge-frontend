@@ -4,9 +4,7 @@ import ProblemList from '../problemList';
 
 const { PureComponent } = React;
 
-interface IDashboardProp {}
-
-class Dashboard extends PureComponent<IDashboardProp> {
+class Dashboard extends PureComponent {
   render() {
     return (
       <div>
@@ -17,4 +15,4 @@ class Dashboard extends PureComponent<IDashboardProp> {
   }
 }
 
-export default IDashboardProp;
+export default Dashboard;

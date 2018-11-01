@@ -1,4 +1,4 @@
-import axios, { CancelToken, AxiosInstance, AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios';
 import { error as errorConst } from '../../constants';
 
 const source = axios.CancelToken.source();
@@ -23,7 +23,7 @@ export const request = (requestConfig: AxiosRequestConfig): Promise<AxiosRespons
         window.location.reload();
       }
       if (axios.isCancel(e)) {
-        return;
+        return Promise.reject(e);
       }
       return Promise.reject(e);
     }

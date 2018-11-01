@@ -27,7 +27,7 @@ export const fetchRequest = (action: RequestAction) => new Observable((observer:
 });
 
 export const requestEpic: Epic<Action> = (action$: Observable<Action>) => action$.pipe(
-  filter((action: Action) => isRequestAction(action)),
+  filter((action: Action): action is RequestAction => isRequestAction(action)),
   switchMap((action: RequestAction) => {
     return fetchRequest(action);
   })

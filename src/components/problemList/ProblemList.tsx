@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { List } from 'immutable';
-import { ApplicationState } from '../../redux/modules/root';
-import { IProblemItem } from '../../redux/modules/training';
-import { selectProblemList } from '$selectors/problemList';
+import { AppState } from '../../redux/types';
+import { IProblemItem } from '../../redux/reducers/training';
+import { selectProblemList } from '../../redux/selectors/problemList';
 import { connect } from 'react-redux';
-import { Tabs } from 'antd';
+// import { Tabs } from 'antd';
 
 const { PureComponent } = React;
-const TabPane = Tabs.TabPane;
+// const TabPane = Tabs.TabPane;
 
 interface IStateProps {
   problemList: List<IProblemItem>;
@@ -26,10 +26,10 @@ class ProblemList extends PureComponent<IProblemListProps> {
   }
 }
 
-const mapPropsToState = (state: ApplicationState): IStateProps => ({
+const mapPropsToState = (state: AppState): IStateProps => ({
   problemList: selectProblemList(state)
 });
 
-export default connect<IStateProps, {}, {}, ApplicationState>(
+export default connect<IStateProps, {}, {}, AppState>(
   mapPropsToState
 )(ProblemList);
