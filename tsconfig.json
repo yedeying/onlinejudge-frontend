@@ -39,7 +39,8 @@
     "suppressImplicitAnyIndexErrors": true
   },
   "include": [
-    "typings/*.d.ts"
+    "typings/*.d.ts",
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",
