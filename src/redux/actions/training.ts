@@ -1,4 +1,3 @@
-import { ofType } from 'redux-observable';
 import { actionTypes, apiUrls } from '../../constants';
 import { REQUEST } from '../../constants/common';
 

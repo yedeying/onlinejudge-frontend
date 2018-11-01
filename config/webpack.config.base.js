@@ -18,7 +18,8 @@ module.exports = {
   resolve: {
     modules: [project.paths.client(), project.paths.node_modules()],
     extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
-    alias: project.alias
+    alias: project.alias,
+    plugins: [new TsconfigPathsPlugin({ configFile: path.join(__dirname, '../tsconfig.json') })]
   },
   module: {
     strictExportPresence: true,
@@ -28,7 +29,10 @@ module.exports = {
         loader: 'babel-loader',
         options: { cacheDirectory: true }
       }, {
-        loader: 'ts-loader'
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true
+        }
       }]
     }, {
       test: /\.worker\.js$/,
@@ -130,8 +134,7 @@ module.exports = {
   plugins: [
     new CaseSensitivePathsPlugin(),
     new webpack.DefinePlugin(project.globals),
-    new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true }),
-    new TsconfigPathsPlugin({ configFile: path.resolve(__dirname, '../tsconfig.json') })
+    new ForkTsCheckerWebpackPlugin({ checkSyntacticErrors: true })
   ],
   node: {
     fs: 'empty',
