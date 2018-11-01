@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Icon } from 'antd';
 import { Link } from 'react-router-dom';
-import { Path } from '$constants/route';
+import { Path } from '../../constants/route';
 
 export interface NavItemProps {
   route: Path;

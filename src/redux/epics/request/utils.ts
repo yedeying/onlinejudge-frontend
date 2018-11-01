@@ -1,4 +1,4 @@
-import { Action, RequestConfig, Request, Response, RequestAction, RequestError, ErrorAction } from '../../types';
+import { Action, Request, Response, RequestAction, RequestError, ErrorAction } from '../../types';
 import { apiUrls, common, actionTypes } from '../../../constants';
 
 export function getActionTypes(action: RequestAction) {
@@ -58,7 +58,6 @@ export const requestActions = {
   success: (action: RequestAction, response: Response): Action => {
     const payload = action.payload;
     const { meta } = action;
-    const { data } = response;
     return {
       type: getActionTypes(action).success,
       payload: { ...payload, ...response },

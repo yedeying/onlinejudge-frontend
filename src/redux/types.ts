@@ -1,9 +1,11 @@
 import { REQUEST } from '../constants/common';
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { ApplicationState } from './reducers/root';
 
 export type RequestConfig = AxiosRequestConfig;
 export type Response = AxiosResponse;
 export type RequestError = AxiosError;
+export type AppState = ApplicationState;
 
 export interface ActionMeta {
   isLoading?: boolean;

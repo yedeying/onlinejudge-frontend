@@ -6,7 +6,7 @@ export const fetchNoList = () => ({
   type: actionTypes.training.FETCH_NO_LIST,
   [REQUEST]: {
     url: apiUrls.training.FETCH_NO_LIST,
-    method: apiUrls.method.POST,
+    method: apiUrls.Method.GET,
     data: {},
     options: { transformResponse: (response: { [key: string]: any }) => ({ ...response }) }
   }
