@@ -11,8 +11,14 @@ const combineReducers = function <IReducerState>(reducers: RouterMap<IReducerSta
   return (state: Record<IReducerState> | undefined, action: Action): Record<IReducerState> => {
     if (!state) {
       // 运行过程中state会出现key无值的情况，故并非完美的Record<IReducerState>
-      // 但为避免业务做太多非空判断，此处通过any来保持state完整
-      return record({}) as any;
+      // 但为避免业务做太多非空判断，此处通过any来保持state完整
+      const defaultValue = Object.keys(reducers)
+        .reduce((p: { [key: string]: undefined }, key: string) => {
+          p[key] = undefined;
+          return p;
+        }, {});
+      // 需要保证和IReducerState一样的结构，否则Record无法set
+      state = record(defaultValue) as Record<any>;
     }
     return state
       .withMutations(temporaryState => {
