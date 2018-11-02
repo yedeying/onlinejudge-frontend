@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, Store } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { routerMiddleware } from 'react-router-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -11,12 +11,14 @@ const router = routerMiddleware(history);
 const epicMiddleware = createEpicMiddleware<Action, Action, AppState>();
 const composeEnhancers = composeWithDevTools({});
 
+export type AppStore = Store<AppState, Action>;
+
 export default function configureStore(initialState = {}) {
   const middlewares = [
     epicMiddleware,
     router
   ];
-  const store = createStore(
+  const store: AppStore = createStore(
     rootReducer,
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))

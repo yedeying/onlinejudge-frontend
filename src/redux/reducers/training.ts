@@ -1,7 +1,8 @@
 import { Reducer } from 'redux';
 import { List } from 'immutable';
-import { ActionType } from 'typesafe-actions';
-import { combineReducers } from 'redux-immutable';
+import { Action } from '../types';
+import { record, Record } from '../utils';
+import combineReducers from '../combineReducers';
 // import { handleActions } from 'redux-actions';
 
 export interface IProblemItem {
@@ -9,24 +10,36 @@ export interface IProblemItem {
   no: string;
   title: string;
 }
+export type ProblemItem = Record<IProblemItem>;
 
-const mockProblemItem: IProblemItem = {
-  id: 101,
-  no: 'A00',
-  title: 'A + B'
-};
-
-export type TrainingAction = ActionType<{}>;
+export interface IProblemNoItem {
+  id: string;
+  title: string;
+}
+export type ProblemNoItem = Record<IProblemNoItem>;
 
 // const problemList = handleActions<List<IProblemItem>, TrainingAction>({}, List([mockProblemItem]));
-const problemList: Reducer<List<IProblemItem>, TrainingAction> = () => {
-  return List([mockProblemItem]);
+const problemList: Reducer<List<ProblemItem>, Action> = () => {
+  return List([
+    record({ id: 101, no: 'A00', title: 'A + B' })
+  ]);
+};
+
+const problemNoList: Reducer<List<ProblemNoItem>, Action> = () => {
+  return List([
+    record({ id: 'A', title: 'A' }),
+    record({ id: 'B', title: 'B' }),
+    record({ id: 'C', title: 'C' })
+  ]);
 };
 
 export interface ITrainingState {
-  readonly problemList: List<IProblemItem>;
+  readonly problemList: List<ProblemItem>;
+  readonly problemNoList: List<ProblemNoItem>;
 }
+export type TrainingState = Record<ITrainingState>;
 
-export const trainingReducer = combineReducers<ITrainingState, TrainingAction>({
-  problemList
+export const trainingReducer = combineReducers<ITrainingState>({
+  problemList,
+  problemNoList
 });

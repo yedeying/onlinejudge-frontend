@@ -1,23 +1,15 @@
-import { Map } from 'immutable';
-import { combineReducers } from 'redux-immutable';
-import { ActionType } from 'typesafe-actions';
 import { RouterState, routerReducer } from './router';
-import { trainingReducer, ITrainingState } from './training';
+import { TrainingState, trainingReducer } from './training';
+import { Record } from '../utils';
+import combineReducers from '../combineReducers';
 
 export interface IApplicationState {
   readonly router: RouterState;
-  readonly training: ITrainingState;
+  readonly training: TrainingState;
 }
+export type ApplicationState = Record<IApplicationState>;
 
-export interface IRouterState {
-  readonly location: Location | null;
-}
-
-export type ApplicationState = Map<string, any>;
-
-export type RootAction = ActionType<{}>;
-
-export const rootReducer = combineReducers<IApplicationState, RootAction>({
+export const rootReducer = combineReducers<IApplicationState>({
   router: routerReducer,
   training: trainingReducer
 });
