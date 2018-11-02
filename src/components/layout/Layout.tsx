@@ -6,7 +6,6 @@ import { Path } from '../../constants/route';
 import Navigationbar from '../navigationbar';
 import Footer from '../footer';
 import ProblemDashboard from '../problemDashboard';
-import './Layout.less';
 
 const { Content } = Layout;
 const { Component } = React;

@@ -73,23 +73,24 @@ function cssLoaders(options, useModule) {
 
 exports.styleLoaders = function styleLoaders(options) {
   const output = [];
-  const loaders = cssLoaders(options, false);
-  for (const extension of Object.keys(loaders)) {
-    output.push({
-      test: new RegExp('\\.' + extension + '$'),
-      use: loaders[extension]
-    });
-  }
-  // for (const useModule of [false, true]) {
-  //   const loaders = cssLoaders(options, useModule);
-  //   for (const extension of Object.keys(loaders)) {
-  //     output.push({
-  //       test: new RegExp('\\.' + extension + '$'),
-  //       [useModule ? 'exclude' : 'include']: /node_modules/,
-  //       use: loaders[extension]
-  //     });
-  //   }
+  // use this to disable cssModule
+  // const loaders = cssLoaders(options, false);
+  // for (const extension of Object.keys(loaders)) {
+  //   output.push({
+  //     test: new RegExp('\\.' + extension + '$'),
+  //     use: loaders[extension]
+  //   });
   // }
+  for (const useModule of [false, true]) {
+    const loaders = cssLoaders(options, useModule);
+    for (const extension of Object.keys(loaders)) {
+      output.push({
+        test: new RegExp('\\.' + extension + '$'),
+        [useModule ? 'exclude' : 'include']: /node_modules/,
+        use: loaders[extension]
+      });
+    }
+  }
   return output;
 };
 

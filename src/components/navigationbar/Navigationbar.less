@@ -2,7 +2,7 @@
 @navColor: #001529;
 @subNavColor: #001d38;
 .header {
-  &.ant-layout-header {
+  &:global(.ant-layout-header) {
     height: auto;
     line-height: 1.5;
     padding: 0;
@@ -18,9 +18,9 @@
 
 .sub-nav {
   background-color: @subNavColor;
-  .ant-menu-dark {
+  :global(.ant-menu-dark) {
     background-color: @subNavColor;
-    .ant-menu-item-selected {
+    :global(.ant-menu-item-selected) {
       background-color: @navColor !important;
     }
   }
@@ -46,8 +46,8 @@
 
 .top-menu, .sub-menu {
   flex-grow: 1;
-  &.ant-menu.ant-menu-dark {
-    .ant-menu-item-selected {
+  &:global(.ant-menu.ant-menu-dark) {
+    :global(.ant-menu-item-selected) {
       background-color: transparent;
     }
   }
