@@ -13,6 +13,7 @@ config/only_dev*
 .*.swp
 .*.swo
 .*.orig
+.cache-loader
 *.less.d.ts
 coverage
 yarn-error.log
