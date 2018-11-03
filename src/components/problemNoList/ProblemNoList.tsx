@@ -15,7 +15,6 @@ const TabPane = Tabs.TabPane;
 interface IStateProps {
   problemNoList: List<IProblemNoItem>;
   actionPage: string;
-  // activeNoKey: string;
 }
 
 interface IProblemNoListProps extends IStateProps {}

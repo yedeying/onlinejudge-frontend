@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { Tag, Table } from 'antd';
 
 const { PureComponent } = React;
-// const TabPane = Tabs.TabPane;
 
 const TitleContent = (value:string) => {
   return {
@@ -28,7 +27,7 @@ const DifficulityContent = (value:string) => {
       tpl = (<Tag color="red">Hard</Tag>);
       break;
     default:
-      tpl = (<Tag color="blue">uncategorized</Tag>);
+      tpl = (<Tag color="blue">Uncategorized</Tag>);
   }
   return {
     children: tpl
