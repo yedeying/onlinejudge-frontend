@@ -11,22 +11,28 @@ const TabPane = Tabs.TabPane;
 
 interface IStateProps {
   problemNoList: List<IProblemNoItem>;
+  // activeNoKey: string;
 }
 
 interface IProblemNoListProps extends IStateProps {}
 
 class ProblemNoList extends PureComponent<IProblemNoListProps> {
+  handleActiveNo = (key: string) => {
+    console.log('key', key);
+  }
+
   render() {
     const { problemNoList } = this.props;
     return (
       <Tabs
-        defaultActiveKey="1"
+        defaultActiveKey="A"
         tabPosition="top"
         style={{ height: 220 }}
+        onChange={this.handleActiveNo}
       >
         {problemNoList.toJS().map((no: IProblemNoItem) => {
           return (
-            <TabPane tab={no.id} key={no.id}>{no.title}</TabPane>
+            <TabPane tab={no.id} key={no.id}>{this.props.children}</TabPane>
           );
         })}
       </Tabs>
