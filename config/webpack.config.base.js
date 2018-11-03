@@ -26,6 +26,8 @@ module.exports = {
     rules: [{
       test: /\.tsx?$/,
       use: [{
+        loader: 'cache-loader'
+      }, {
         loader: 'babel-loader',
         options: { cacheDirectory: true }
       }, {
@@ -45,10 +47,12 @@ module.exports = {
     }, {
       test: /\.jsx?$/,
       exclude: [/node_modules/, /\.min\.js/],
-      use: {
+      use: [{
+        loader: 'cache-loader'
+      }, {
         loader: 'babel-loader',
         options: { cacheDirectory: true }
-      }
+      }]
     }, {
       test: /\.svg$/,
       oneOf: [{

@@ -15,63 +15,65 @@
   format("svg");
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  font-family: @font-family;
-  height: 100%;
-  color: @Black1;
-}
-
-input, button {
-  outline: none;
-}
-
-input, textarea, select, button {
-  font-family: @font-family;
-}
-
-input::-ms-clear {
-  display: none;
-}
-
-button {
-  cursor: pointer;
-
-  border: none;
-  background: none;
-  svg:only-child {
-    display: block;
+:global {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-}
 
-svg {
-  flex-shrink: 0;
-}
-
-a {
-  cursor: pointer;
-  transition: color .3s ease;
-  text-decoration: none;
-
-  outline: none;
-  background: transparent;
-}
-
-.clearfix {
-  zoom: 1;
-  &:after, &:before {
-    display: table;
-    content: "";
+  body {
+    font-family: @font-family;
+    height: 100%;
+    color: @Black1;
   }
-  &:after {
-    clear: both;
-    overflow: hidden;
+
+  input, button {
+    outline: none;
+  }
+
+  input, textarea, select, button {
+    font-family: @font-family;
+  }
+
+  input::-ms-clear {
+    display: none;
+  }
+
+  button {
+    cursor: pointer;
+
+    border: none;
+    background: none;
+    svg:only-child {
+      display: block;
+    }
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  a {
+    cursor: pointer;
+    transition: color .3s ease;
+    text-decoration: none;
+
+    outline: none;
+    background: transparent;
+  }
+
+  .clearfix {
+    zoom: 1;
+    &:after, &:before {
+      display: table;
+      content: "";
+    }
+    &:after {
+      clear: both;
+      overflow: hidden;
+    }
   }
 }

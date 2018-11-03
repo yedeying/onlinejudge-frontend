@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import NavItem, { NavItemProps } from './NavItem';
 import { AppState } from '../../redux/types';
 import { selectPath } from '../../redux/selectors/route';
-import './Navigationbar.less';
+import * as styles from './Navigationbar.less';
 
 const { PureComponent } = React;
 const { Header } = Layout;
@@ -86,7 +86,7 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
 
   getNavItemClass({ floatRight }: NavItemOptions): string {
     return classnames('', {
-      'menu-right': floatRight
+      [styles.menuRight]: floatRight
     });
   }
 
@@ -137,14 +137,14 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
     const subNavList = this.getSubNav(activeNav);
     const activeSubNav = this.getActiveSubNav();
     return (
-      <Header className="header">
-        <div className="main-nav">
-          <div className="header-wrapper">
-            <div className="brand">
+      <Header className={styles.header}>
+        <div>
+          <div className={styles.headerWrapper}>
+            <div className={styles.brand}>
               <Link to={Path.ROOT}>OnlineJudge</Link>
             </div>
             <Menu
-              className="top-menu"
+              className={styles.topMenu}
               theme="dark"
               mode="horizontal"
               selectedKeys={activeNav ? [activeNav.key] : []}
@@ -157,10 +157,10 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
             </Menu>
           </div>
         </div>
-        {subNavList.length > 0 && <div className="sub-nav">
-          <div className="header-wrapper">
+        {subNavList.length > 0 && <div className={styles.subNav}>
+          <div className={styles.headerWrapper}>
             <Menu
-              className="sub-menu"
+              className={styles.subMenu}
               theme="dark"
               mode="horizontal"
               selectedKeys={activeSubNav ? [activeSubNav.key] : []}
