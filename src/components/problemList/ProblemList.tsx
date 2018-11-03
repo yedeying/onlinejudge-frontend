@@ -9,6 +9,24 @@ import { connect } from 'react-redux';
 const { PureComponent } = React;
 // const TabPane = Tabs.TabPane;
 
+const TitleContent = (value:string, row: IProblemItem, index: number) => {
+  return {
+    children: (<a href="#">{value}</a>)
+  }
+}
+
+const columns = [{
+  title: 'No',
+  dataIndex: 'no',
+  sortr: true,
+  width: '10%',
+}, {
+  title: 'Title',
+  dataIndex: 'id',
+  width: '40%',
+  render: TitleContent
+}];
+
 interface IStateProps {
   problemList: List<IProblemItem>;
 }
