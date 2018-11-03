@@ -6,6 +6,7 @@ import { Path } from '../../constants/route';
 import Navigationbar from '../navigationbar';
 import Footer from '../footer';
 import ProblemDashboard from '../problemDashboard';
+import { mainContentWrapper } from './Layout.less';
 
 const { Content } = Layout;
 const { Component } = React;
@@ -22,10 +23,11 @@ class AppLayout extends Component {
     return (
       <Layout>
         <Navigationbar />
-        <Content className="main-content-wrapper">
+        <Content className={mainContentWrapper}>
           <Route exact path={Path.ROOT} render={() => <Redirect to={Path.TRAINING} />} />
           <Route exact path={Path.TRAINING} render={() => <Redirect to={Path.TRAINING_PROBLEMS} />} />
-          <Route exact path={Path.TRAINING_PROBLEMS} render={() => <ProblemDashboard />} />
+          <Route exact path={Path.TRAINING_PROBLEMS} render={() => <Redirect to={Path.TRAINING_PROBLEMS_NO.replace(':no', 'A')} />} />
+          <Route exact path={Path.TRAINING_PROBLEMS_NO} render={({ match }) => <ProblemDashboard {...match} />} />
         </Content>
         <Footer />
       </Layout>
