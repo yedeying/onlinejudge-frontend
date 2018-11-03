@@ -1,7 +1,7 @@
 import { RouterState, routerReducer } from './router';
 import { TrainingState, trainingReducer } from './training';
-import { Record } from '../utils';
-import combineReducers from '../combineReducers';
+import { combineReducers } from '../utils';
+import { Record } from '../types';
 
 export interface IApplicationState {
   readonly router: RouterState;

@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { Record } from 'immutable';
 import { Action } from './types';
-import { record } from '$utils';
+import { record } from './utils';
 
 type RouterMap<T> = {
   [K in keyof T]: Reducer<T[K], Action>;

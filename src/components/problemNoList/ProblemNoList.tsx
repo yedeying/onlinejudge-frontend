@@ -4,24 +4,34 @@ import { connect } from 'react-redux';
 import { Tabs } from 'antd';
 
 import history from '../../redux/store/history';
-import { IProblemNoItem } from '../../redux/reducers/training';
+import { ProblemNoItem } from '../../redux/reducers/training';
 import { AppState } from '../../redux/types';
+import { Path } from '../../constants/route';
 import { selectProblemNoList } from '../../redux/selectors/problemList';
 import { selectionActivePage } from '../../redux/selectors/route';
+import { fetchNoList } from '../../redux/actions/training';
 
 const { PureComponent } = React;
 const TabPane = Tabs.TabPane;
 
 interface IStateProps {
-  problemNoList: List<IProblemNoItem>;
+  problemNoList: List<ProblemNoItem>;
   actionPage: string;
 }
+interface IDispatchProps {
+  fetchNoList: typeof fetchNoList;
+}
 
-interface IProblemNoListProps extends IStateProps {}
+interface IProblemNoListProps extends IStateProps, IDispatchProps {}
 
 class ProblemNoList extends PureComponent<IProblemNoListProps> {
+  componentDidMount() {
+    const { fetchNoList } = this.props;
+    fetchNoList();
+  }
+
   handleActiveNo = (key: string) => {
-    history.push(`/training/problems/${key}`);
+    history.push(Path.TRAINING_PROBLEMS_NO.replace(':no', key));
   }
 
   render() {
@@ -33,9 +43,9 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
         style={{ width: '100%' }}
         onChange={this.handleActiveNo}
       >
-        {problemNoList.toJS().map((no: IProblemNoItem) => {
+        {problemNoList.map(no => {
           return (
-            <TabPane tab={no.id} key={no.id}>
+            <TabPane tab={no.get('id')} key={no.get('id')}>
               {this.props.children}
             </TabPane>
           );
@@ -45,11 +55,10 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
   }
 }
 
-const mapPropsToState = (state: AppState): IStateProps => ({
-  problemNoList: selectProblemNoList(state),
-  actionPage: selectionActivePage(state)
-});
-
-export default connect<IStateProps, {}, {}, AppState>(
-  mapPropsToState
+export default connect<IStateProps, IDispatchProps, {}, AppState>(
+  state => ({
+    problemNoList: selectProblemNoList(state),
+    actionPage: selectionActivePage(state)
+  }),
+  { fetchNoList }
 )(ProblemNoList);

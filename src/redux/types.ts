@@ -1,4 +1,6 @@
 import { REQUEST } from '../constants/common';
+import { Record as AliasRecord } from 'immutable';
+import { Reducer as ReduxReducer } from 'redux';
 import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { ApplicationState } from './reducers/root';
 
@@ -6,6 +8,7 @@ export type RequestConfig = AxiosRequestConfig;
 export type Response = AxiosResponse;
 export type RequestError = AxiosError;
 export type AppState = ApplicationState;
+export type Record<T> = AliasRecord<T>;
 
 export interface ActionMeta {
   isLoading?: boolean;
@@ -18,6 +21,12 @@ export interface Action {
   meta?: ActionMeta;
   error?: any;
   payload: any;
+}
+
+export type Reducer<T, A extends Action> = ReduxReducer<T, A>;
+
+export interface ReducerMap<T> {
+  [key: string]: (state: T, action: Action) => T;
 }
 
 export interface Request {

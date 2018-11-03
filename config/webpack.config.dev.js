@@ -17,7 +17,6 @@ const config = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: false })
   },
-  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       inject: true,
