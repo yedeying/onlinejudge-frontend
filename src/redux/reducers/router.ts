@@ -1,6 +1,6 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { record, Record } from '../utils';
-import { Action } from '../types';
+import { record } from '../utils';
+import { Action, Record } from '../types';
 
 export interface IRouterState {
   readonly location: Location | null;
@@ -8,10 +8,12 @@ export interface IRouterState {
 }
 export type RouterState = Record<IRouterState>;
 
-const defaultRouterState: RouterState = record({
+const defaultRouter: IRouterState = {
   location: null,
   action: null
-});
+};
+
+const defaultRouterState: RouterState = record(defaultRouter);
 
 export const routerReducer = (state: RouterState = defaultRouterState, { type, payload }: Action) => {
   if (type === LOCATION_CHANGE) {

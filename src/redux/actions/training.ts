@@ -6,18 +6,16 @@ export const fetchNoList = () => ({
   [REQUEST]: {
     url: apiUrls.training.FETCH_NO_LIST,
     method: apiUrls.Method.GET,
-    data: {},
-    options: { transformResponse: (response: { [key: string]: any }) => ({ ...response }) }
+    data: {}
   }
 });
 
-export const fetchProblemList = (pageId: number) => ({
-  type: actionTypes.training.FETCH_PROBLME_LIST,
+export const fetchProblemList = (pageId: string) => ({
+  type: actionTypes.training.FETCH_PROBLEM_LIST,
   payload: { pageId },
   [REQUEST]: {
-    url: apiUrls.training.FETCH_PROBLEM_LIST,
-    method: apiUrls.training.FETCH_PROBLEM_LIST,
-    data: { pageId },
-    options: { transformResponse: (response: { [key: string]: any }) => ({ ...response, pageId }) }
+    url: apiUrls.training.FETCH_PROBLEM_LIST.replace(':pageId', pageId),
+    method: apiUrls.Method.GET,
+    data: {}
   }
 });

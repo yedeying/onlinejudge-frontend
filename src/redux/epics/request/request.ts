@@ -23,7 +23,7 @@ export const fetchRequest = (action: RequestAction) => new Observable((observer:
       observer.next(requestActions.fail(action, e));
       observer.complete();
     });
-  return () => requestActions.cancel(action);
+  // return () => requestActions.cancel(action);
 });
 
 export const startRequestEpic: Epic<Action> = (action$: Observable<Action>) => action$.pipe(

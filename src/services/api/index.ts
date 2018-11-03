@@ -8,16 +8,18 @@ const axiosInstance: AxiosInstance = axios.create({
   headers: { 'Content-Type': 'application/json' }
 });
 
-interface Cancelable {
-  cancel: () => void;
-}
+// interface Cancelable {
+//   cancel: () => void;
+// }
 
-export const request = (requestConfig: AxiosRequestConfig): Promise<AxiosResponse> & Cancelable => {
+export const request = (requestConfig: AxiosRequestConfig): Promise<AxiosResponse> => {
   const requestInstance = axiosInstance.request({
     ...requestConfig,
     cancelToken: source.token
   }).then(
-    (response: AxiosResponse) => response,
+    (response: AxiosResponse) => {
+      return response;
+    },
     (e: AxiosError) => {
       if (e.code === errorConst.StatusCode.LOGIN_REQUIRED) {
         window.location.reload();
@@ -28,8 +30,5 @@ export const request = (requestConfig: AxiosRequestConfig): Promise<AxiosRespons
       return Promise.reject(e);
     }
   );
-  return {
-    ...requestInstance,
-    cancel: () => source.cancel('Operation canceled')
-  };
+  return requestInstance;
 };
