@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import { Action } from '../types';
 import { record, Record } from '../utils';
 import combineReducers from '../combineReducers';
@@ -7,6 +7,7 @@ import combineReducers from '../combineReducers';
 
 export interface IProblemItem {
   id: number;
+  key?: number;
   no: string;
   title: string;
 }
@@ -21,7 +22,8 @@ export type ProblemNoItem = Record<IProblemNoItem>;
 // const problemList = handleActions<List<IProblemItem>, TrainingAction>({}, List([mockProblemItem]));
 const problemList: Reducer<List<ProblemItem>, Action> = () => {
   return List([
-    record({ id: 101, no: 'A00', title: 'A + B' })
+    Map({ id: 101, no: 'A00', title: 'A + B' }) as any
+    // record({ id: 101, no: 'A00', title: 'A + B', key: undefined })
   ]);
 };
 

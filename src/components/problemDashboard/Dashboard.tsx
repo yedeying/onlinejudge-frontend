@@ -9,8 +9,9 @@ class Dashboard extends PureComponent {
   render() {
     return (
       <div className={contentWrapper}>
-        <ProblemNoList />
-        <ProblemList />
+        <ProblemNoList>
+          <ProblemList />
+        </ProblemNoList>
       </div>
     );
   }
