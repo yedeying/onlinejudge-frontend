@@ -7,7 +7,7 @@ import history from '../../redux/store/history';
 import { ProblemNoItem } from '../../redux/reducers/training';
 import { AppState } from '../../redux/types';
 import { Path } from '../../constants/route';
-import { selectProblemNoList } from '../../redux/selectors/problemList';
+import { selectProblemNoList } from '../../redux/selectors/training';
 import { selectionActivePage } from '../../redux/selectors/route';
 import { fetchNoList } from '../../redux/actions/training';
 

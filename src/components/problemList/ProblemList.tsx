@@ -5,7 +5,7 @@ import { Tag, Table } from 'antd';
 
 import { AppState } from '../../redux/types';
 import { ProblemItem } from '../../redux/reducers/training';
-import { selectProblemList } from '../../redux/selectors/problemList';
+import { selectProblemList } from '../../redux/selectors/training';
 import { selectionActivePage } from '../../redux/selectors/route';
 import { fetchProblemList } from '../../redux/actions/training';
 
