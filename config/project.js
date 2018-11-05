@@ -70,7 +70,7 @@ const config = {
   // ----------------------------------
   // Compiler Configuration
   // ----------------------------------
-  compiler_devtool: 'cheap-module-eval-source-map',
+  compiler_devtool: 'source-map',
   compiler_fail_on_warning: false,
   compiler_quiet: false,
   compiler_stats: {

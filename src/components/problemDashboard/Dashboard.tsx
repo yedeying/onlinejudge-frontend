@@ -1,6 +1,5 @@
 import * as React from 'react';
 import ProblemNoList from '../problemNoList';
-import ProblemList from '../problemList';
 import { contentWrapper } from './Dashboard.less';
 
 const { PureComponent } = React;
@@ -10,7 +9,6 @@ class Dashboard extends PureComponent {
     return (
       <div className={contentWrapper}>
         <ProblemNoList />
-        <ProblemList />
       </div>
     );
   }

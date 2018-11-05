@@ -7,3 +7,7 @@ export const selectProblemList = (state: AppState) => {
 export const selectProblemNoList = (state: AppState) => {
   return state.getIn(['training', 'problemNoList']);
 };
+
+export const isProblemListLoading = (state: AppState) => {
+  return state.getIn(['training', 'loadingProblemList']);
+};
