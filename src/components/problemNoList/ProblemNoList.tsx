@@ -36,6 +36,7 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
 
   render() {
     const { problemNoList, actionPage } = this.props;
+    console.log('ssss');
     return (
       <Tabs
         defaultActiveKey={actionPage}
