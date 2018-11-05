@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { AppState } from '../../redux/types';
 import { IProblemItem, ProblemItem } from '../../redux/reducers/training';
 import { selectProblemList } from '../../redux/selectors/training';
-import { selectionActivePage } from '../../redux/selectors/route';
+import { selectActivePage } from '../../redux/selectors/route';
 import { fetchProblemList } from '../../redux/actions/training';
 
 const { PureComponent } = React;
@@ -77,9 +77,18 @@ interface IDispatchProps {
   fetchProblemList: typeof fetchProblemList;
 }
 
-interface IProblemListProps extends IStateProps, IDispatchProps {}
+interface IProblemListProps extends IStateProps, IDispatchProps {
+  pageId: string;
+}
 
 class ProblemList extends PureComponent<IProblemListProps> {
+  componentDidUpdate(prevProps: IProblemListProps) {
+    const { actionPage, pageId, fetchProblemList } = this.props;
+    if (actionPage !== prevProps.actionPage && actionPage === pageId) {
+      fetchProblemList(actionPage);
+    }
+  }
+
   componentDidMount() {
     const { fetchProblemList, actionPage } = this.props;
     fetchProblemList(actionPage);
@@ -104,7 +113,7 @@ class ProblemList extends PureComponent<IProblemListProps> {
 export default connect<IStateProps, IDispatchProps, {}, AppState>(
   state => ({
     problemList: selectProblemList(state),
-    actionPage: selectionActivePage(state)
+    actionPage: selectActivePage(state)
   }),
   { fetchProblemList }
 )(ProblemList);

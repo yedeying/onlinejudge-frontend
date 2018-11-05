@@ -9,6 +9,7 @@ const baseWebpackConfig = require('./webpack.config.base');
 const commonChunks = ['manifest', 'vendor'];
 const config = merge(baseWebpackConfig, {
   mode: 'development',
+  devtool: project.compiler_devtool,
   output: {
     pathinfo: true,
     filename: 'js/[name]-[hash:8].js',

@@ -21,12 +21,14 @@ export type ProblemNoItem = Record<IProblemNoItem>;
 export interface ITrainingState {
   readonly problemList: List<ProblemItem>;
   readonly problemNoList: List<ProblemNoItem>;
+  readonly loadingProblemList: boolean;
 }
 export type TrainingState = Record<ITrainingState>;
 
 const defaultState: TrainingState = record({
   problemList: List(),
-  problemNoList: List()
+  problemNoList: List(),
+  loadingProblemList: false
 });
 
 export const trainingReducer = handleActions<TrainingState>({
@@ -36,13 +38,18 @@ export const trainingReducer = handleActions<TrainingState>({
       List(payload.data.map((item: IProblemNoItem) => record(item)))
     );
   },
+  // [training.FETCH_PROBLEM_LIST_START](state) {
+  //   return state.set('loadingProblemList', true);
+  // },
   [training.FETCH_PROBLEM_LIST_SUCCESS](state, { payload }) {
-    return state.set(
-      'problemList',
-      List(payload.data.map((item: IProblemItem) => {
-        item.key = item.id;
-        return record(item);
-      }))
-    );
+    return state
+      .set(
+        'problemList',
+        List(payload.data.map((item: IProblemItem) => {
+          item.key = item.id;
+          return record(item);
+        }))
+      )
+      .set('loadingProblemList', false);
   }
 }, defaultState);

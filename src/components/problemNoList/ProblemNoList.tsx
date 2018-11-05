@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { Tabs } from 'antd';
 
 import history from '../../redux/store/history';
+import ProblemList from '../problemList';
 import { ProblemNoItem } from '../../redux/reducers/training';
 import { AppState } from '../../redux/types';
 import { Path } from '../../constants/route';
-import { selectProblemNoList } from '../../redux/selectors/training';
-import { selectionActivePage } from '../../redux/selectors/route';
+import { selectProblemNoList, isProblemListLoading } from '../../redux/selectors/training';
+import { selectActivePage } from '../../redux/selectors/route';
 import { fetchNoList } from '../../redux/actions/training';
 
 const { PureComponent } = React;
@@ -17,6 +18,7 @@ const TabPane = Tabs.TabPane;
 interface IStateProps {
   problemNoList: List<ProblemNoItem>;
   actionPage: string;
+  isLoading: boolean;
 }
 interface IDispatchProps {
   fetchNoList: typeof fetchNoList;
@@ -35,11 +37,11 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
   }
 
   render() {
-    const { problemNoList, actionPage } = this.props;
-    console.log('ssss');
+    const { problemNoList, actionPage, isLoading } = this.props;
     return (
       <Tabs
         defaultActiveKey={actionPage}
+        animated={false}
         tabPosition="top"
         style={{ width: '100%' }}
         onChange={this.handleActiveNo}
@@ -47,7 +49,7 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
         {problemNoList.map(no => {
           return (
             <TabPane tab={no.get('id')} key={no.get('id')}>
-              {this.props.children}
+              {!isLoading && <ProblemList pageId={no.get('id')} />}
             </TabPane>
           );
         })}
@@ -59,7 +61,8 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
 export default connect<IStateProps, IDispatchProps, {}, AppState>(
   state => ({
     problemNoList: selectProblemNoList(state),
-    actionPage: selectionActivePage(state)
+    actionPage: selectActivePage(state),
+    isLoading: isProblemListLoading(state)
   }),
   { fetchNoList }
 )(ProblemNoList);
