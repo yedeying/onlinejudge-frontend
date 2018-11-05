@@ -3,18 +3,20 @@ import { List } from 'immutable';
 import { connect } from 'react-redux';
 import { Tag, Table } from 'antd';
 import { ColumnProps } from 'antd/lib/table';
+import { Link } from 'react-router-dom';
 
 import { AppState } from '../../redux/types';
-import { ProblemItem } from '../../redux/reducers/training';
+import { IProblemItem, ProblemItem } from '../../redux/reducers/training';
 import { selectProblemList } from '../../redux/selectors/training';
 import { selectActivePage } from '../../redux/selectors/router';
 import { fetchProblemList } from '../../redux/actions/training';
 
 const { PureComponent } = React;
 
-const TitleContent = (value: string) => {
+const TitleContent = (value: string, record: IProblemItem) => {
+  console.log('row', record);
   return {
-    children: (<a href="#">{value}</a>)
+    children: (<Link to={`/training/detail/${record.no}`}><a href="#">{value}</a></Link>)
   };
 };
 
@@ -38,7 +40,7 @@ const DifficulityContent = (value: string) => {
   };
 };
 
-const columns: ColumnProps<{}>[] = [{
+const columns: ColumnProps<IProblemItem>[] = [{
   title: 'No',
   dataIndex: 'no',
   sorter: true,
@@ -100,6 +102,8 @@ class ProblemList extends PureComponent<IProblemListProps> {
         <Table columns={columns}
           dataSource={problemList.toJS()}
           locale={{ filterConfirm: 'Confirm', filterReset: 'Reset' }}
+          size="middle"
+          pagination={false}
         />
       </div>
     );
