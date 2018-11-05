@@ -2,6 +2,7 @@ import * as React from 'react';
 import { List } from 'immutable';
 import { connect } from 'react-redux';
 import { Tag, Table } from 'antd';
+import { ColumnProps } from 'antd/lib/table';
 
 import { AppState } from '../../redux/types';
 import { ProblemItem } from '../../redux/reducers/training';
@@ -37,10 +38,10 @@ const DifficulityContent = (value: string) => {
   };
 };
 
-const columns = [{
+const columns: ColumnProps<{}>[] = [{
   title: 'No',
   dataIndex: 'no',
-  sortr: true,
+  sorter: true,
   width: '10%',
   key: 'no'
 }, {
