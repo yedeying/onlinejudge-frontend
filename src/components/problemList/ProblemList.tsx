@@ -14,7 +14,6 @@ import { fetchProblemList } from '../../redux/actions/training';
 const { PureComponent } = React;
 
 const TitleContent = (value: string, record: IProblemItem) => {
-  console.log('row', record);
   return {
     children: (<Link to={`/training/detail/${record.no}`}><a href="#">{value}</a></Link>)
   };
@@ -43,7 +42,7 @@ const DifficulityContent = (value: string) => {
 const columns: ColumnProps<IProblemItem>[] = [{
   title: 'No',
   dataIndex: 'no',
-  sorter: true,
+  sorter: (a, b) => parseInt(a.no.slice(1), 10) - parseInt(b.no.slice(1), 10),
   width: '10%',
   key: 'no'
 }, {
@@ -60,12 +59,16 @@ const columns: ColumnProps<IProblemItem>[] = [{
   title: 'Difficulity',
   dataIndex: 'difficulity',
   render: DifficulityContent,
-  key: 'difficulity',
+  // key: 'difficulity',
   filters: [
     { text: 'Easy', value: 'easy' },
     { text: 'Medium', value: 'medium' },
     { text: 'Hard', value: 'hard' }
-  ]
+  ],
+  onFilter: (value, record) => {
+    const str = record.difficulity || '';
+    return str.indexOf(value) === 0;
+  }
 }];
 
 interface IStateProps {
