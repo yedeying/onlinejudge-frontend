@@ -15,7 +15,7 @@ const { PureComponent } = React;
 
 const TitleContent = (value: string, record: IProblemItem) => {
   return {
-    children: (<Link to={`/training/detail/${record.no}`}><a href="#">{value}</a></Link>)
+    children: (<Link to={`/training/detail/${record.no}`}>{value}</Link>)
   };
 };
 
