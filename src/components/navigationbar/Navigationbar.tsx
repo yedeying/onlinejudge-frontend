@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Location } from 'history';
+import { Pathname } from 'history';
 import { connect } from 'react-redux';
 import { Layout, Menu } from 'antd';
 import classnames from 'classnames';
@@ -8,7 +8,7 @@ import { Path } from '../../constants/route';
 import { Link } from 'react-router-dom';
 import NavItem, { NavItemProps } from './NavItem';
 import { AppState } from '../../redux/types';
-import { selectPath } from '../../redux/selectors/route';
+import { selectPathname } from '../../redux/selectors/router';
 import * as styles from './Navigationbar.less';
 
 const { PureComponent } = React;
@@ -17,7 +17,7 @@ const { Header } = Layout;
 type NavItemOptions = NavItemProps & { key: string, floatRight?: boolean, subNav?: NavItemOptions[] };
 
 interface IStateProps {
-  path: Location<any> | null;
+  pathname: Pathname;
 }
 
 interface INavigationbarProps extends IStateProps {}
@@ -91,11 +91,7 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
   }
 
   getActiveNav(): NavItemOptions | null {
-    const { path } = this.props;
-    if (!path) {
-      return null;
-    }
-    const { pathname } = path;
+    const { pathname } = this.props;
     for (const navItem of this.navList) {
       if (pathname.indexOf(navItem.route) === 0) {
         return navItem;
@@ -115,11 +111,7 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
   }
 
   getActiveSubNav(): NavItemOptions | null {
-    const { path } = this.props;
-    if (!path) {
-      return null;
-    }
-    const { pathname } = path;
+    const { pathname } = this.props;
     const activeNav = this.getActiveNav();
     if (!activeNav || !activeNav.subNav) {
       return null;
@@ -180,6 +172,6 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
 
 export default connect<IStateProps, {}, {}, AppState>(
   (state: AppState): IStateProps => ({
-    path: selectPath(state)
+    pathname: selectPathname(state)
   })
 )(Navigationbar);

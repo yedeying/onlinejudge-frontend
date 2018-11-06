@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import { Store } from 'redux';
 import { History } from 'history';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router/immutable';
+import AppRouter from '../../components/router';
 import Layout from '../../components/layout';
 
 const { Component } = React;
@@ -23,9 +23,9 @@ export default class App extends Component<AppProps> {
     const { store, history } = this.props;
     return (
       <Provider store={store}>
-        <ConnectedRouter history={history}>
+        <AppRouter history={history}>
           <Layout />
-        </ConnectedRouter>
+        </AppRouter>
       </Provider>
     );
   }

@@ -7,7 +7,7 @@ import { ColumnProps } from 'antd/lib/table';
 import { AppState } from '../../redux/types';
 import { ProblemItem } from '../../redux/reducers/training';
 import { selectProblemList } from '../../redux/selectors/training';
-import { selectActivePage } from '../../redux/selectors/route';
+import { selectActivePage } from '../../redux/selectors/router';
 import { fetchProblemList } from '../../redux/actions/training';
 
 const { PureComponent } = React;

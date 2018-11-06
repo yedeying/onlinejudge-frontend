@@ -1,15 +1,25 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { record } from '../utils';
 import { Action, Record } from '../types';
+import { Location as ILocation } from 'history';
+
+export type Location = Record<ILocation>;
+
+const defaultLocation: ILocation = {
+  pathname: location.pathname,
+  search: location.search,
+  hash: location.hash,
+  state: ''
+};
 
 export interface IRouterState {
-  readonly location: Location | null;
+  readonly location: Location;
   readonly action: string | null;
 }
 export type RouterState = Record<IRouterState>;
 
 const defaultRouter: IRouterState = {
-  location: null,
+  location: record(defaultLocation),
   action: null
 };
 

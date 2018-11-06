@@ -9,7 +9,7 @@ import { ProblemNoItem } from '../../redux/reducers/training';
 import { AppState } from '../../redux/types';
 import { Path } from '../../constants/route';
 import { selectProblemNoList, isProblemListLoading } from '../../redux/selectors/training';
-import { selectActivePage } from '../../redux/selectors/route';
+import { selectActivePage } from '../../redux/selectors/router';
 import { fetchNoList } from '../../redux/actions/training';
 
 const { PureComponent } = React;
