@@ -5,7 +5,7 @@ import { onLocationChanged } from '../../redux/actions/router';
 import { AppState } from '../../redux/types';
 import { History, Location, Action } from 'history';
 
-const { Component } = React;
+const { PureComponent } = React;
 
 interface IStateProps {
   action: Action;
@@ -20,7 +20,7 @@ interface IAppRouterProps extends IStateProps, IDispatchProps {
   history: History;
 }
 
-class AppRouter extends Component<IAppRouterProps> {
+class AppRouter extends PureComponent<IAppRouterProps> {
   private inTimeTravelling = false;
 
   private unlisten: () => void;

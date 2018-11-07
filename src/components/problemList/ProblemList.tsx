@@ -5,6 +5,7 @@ import { Tag, Table } from 'antd';
 import { ColumnProps } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
 
+import Loading from '../loading';
 import { AppState } from '../../redux/types';
 import { IProblemItem, ProblemItem } from '../../redux/reducers/training';
 import { selectProblemList, isProblemListLoading } from '../../redux/selectors/training';
@@ -102,7 +103,7 @@ class ProblemList extends PureComponent<IProblemListProps> {
     const { problemList, isLoading } = this.props;
 
     if (isLoading) {
-      return <div>isLoading</div>;
+      return <Loading />;
     }
 
     return (
