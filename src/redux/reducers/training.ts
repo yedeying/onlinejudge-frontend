@@ -9,6 +9,7 @@ export interface IProblemItem {
   key?: number;
   no: string;
   title: string;
+  difficulity?: string;
 }
 export type ProblemItem = Record<IProblemItem>;
 
@@ -38,9 +39,9 @@ export const trainingReducer = handleActions<TrainingState>({
       List(payload.data.map((item: IProblemNoItem) => record(item)))
     );
   },
-  // [training.FETCH_PROBLEM_LIST_START](state) {
-  //   return state.set('loadingProblemList', true);
-  // },
+  [training.FETCH_PROBLEM_LIST_START](state) {
+    return state.set('loadingProblemList', true);
+  },
   [training.FETCH_PROBLEM_LIST_SUCCESS](state, { payload }) {
     return state
       .set(

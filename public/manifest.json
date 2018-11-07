@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "React App Sample",
+  "short_name": "oj",
+  "name": "Online Judge",
   "icons": [
     {
       "src": "favicon.ico",

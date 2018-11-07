@@ -8,7 +8,7 @@ import ProblemList from '../problemList';
 import { ProblemNoItem } from '../../redux/reducers/training';
 import { AppState } from '../../redux/types';
 import { Path } from '../../constants/route';
-import { selectProblemNoList, isProblemListLoading } from '../../redux/selectors/training';
+import { selectProblemNoList } from '../../redux/selectors/training';
 import { selectActivePage } from '../../redux/selectors/router';
 import { fetchNoList } from '../../redux/actions/training';
 
@@ -18,7 +18,6 @@ const TabPane = Tabs.TabPane;
 interface IStateProps {
   problemNoList: List<ProblemNoItem>;
   actionPage: string;
-  isLoading: boolean;
 }
 interface IDispatchProps {
   fetchNoList: typeof fetchNoList;
@@ -38,7 +37,6 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
 
   render() {
     const { problemNoList, actionPage } = this.props;
-    console.log('ssss');
     return (
       <Tabs
         defaultActiveKey={actionPage}
@@ -50,7 +48,7 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
         {problemNoList.map(no => {
           return (
             <TabPane tab={no.get('id')} key={no.get('id')}>
-              {!isLoading && <ProblemList pageId={no.get('id')} />}
+              <ProblemList pageId={no.get('id')} />
             </TabPane>
           );
         })}
@@ -62,8 +60,7 @@ class ProblemNoList extends PureComponent<IProblemNoListProps> {
 export default connect<IStateProps, IDispatchProps, {}, AppState>(
   state => ({
     problemNoList: selectProblemNoList(state),
-    actionPage: selectActivePage(state),
-    isLoading: isProblemListLoading(state)
+    actionPage: selectActivePage(state)
   }),
   { fetchNoList }
 )(ProblemNoList);

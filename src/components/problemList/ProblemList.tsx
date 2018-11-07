@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { AppState } from '../../redux/types';
 import { IProblemItem, ProblemItem } from '../../redux/reducers/training';
-import { selectProblemList } from '../../redux/selectors/training';
+import { selectProblemList, isProblemListLoading } from '../../redux/selectors/training';
 import { selectActivePage } from '../../redux/selectors/router';
 import { fetchProblemList } from '../../redux/actions/training';
 
@@ -74,6 +74,7 @@ const columns: ColumnProps<IProblemItem>[] = [{
 interface IStateProps {
   problemList: List<ProblemItem>;
   actionPage: string;
+  isLoading: boolean;
 }
 
 interface IDispatchProps {
@@ -98,7 +99,11 @@ class ProblemList extends PureComponent<IProblemListProps> {
   }
 
   render() {
-    const { problemList } = this.props;
+    const { problemList, isLoading } = this.props;
+
+    if (isLoading) {
+      return <div>isLoading</div>;
+    }
 
     return (
       <div>
@@ -116,7 +121,8 @@ class ProblemList extends PureComponent<IProblemListProps> {
 export default connect<IStateProps, IDispatchProps, {}, AppState>(
   state => ({
     problemList: selectProblemList(state),
-    actionPage: selectActivePage(state)
+    actionPage: selectActivePage(state),
+    isLoading: isProblemListLoading(state)
   }),
   { fetchProblemList }
 )(ProblemList);
