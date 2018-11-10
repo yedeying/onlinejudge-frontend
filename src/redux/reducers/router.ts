@@ -27,7 +27,7 @@ const defaultRouterState: RouterState = record(defaultRouter);
 
 export const routerReducer = (state: RouterState = defaultRouterState, { type, payload }: Action) => {
   if (type === LOCATION_CHANGE) {
-    return state.set('location', payload.location || payload);
+    return state.set('location', record(payload.location || payload));
   }
   return state;
 };

@@ -10,6 +10,9 @@ export interface IProblemItem {
   no: string;
   title: string;
   difficulity?: string;
+  tags: string[];
+  createAt: Date;
+  updatedAt: Date;
 }
 export type ProblemItem = Record<IProblemItem>;
 
@@ -19,18 +22,32 @@ export interface IProblemNoItem {
 }
 export type ProblemNoItem = Record<IProblemNoItem>;
 
+export interface IProblemDetail extends IProblemItem {
+  description: string;
+  timeLimit: number;
+  memoryLimit: number;
+  judger: string;
+  dataSet: string;
+}
+
+export type ProblemDetail = Record<IProblemDetail>;
+
 export interface ITrainingState {
   readonly problemList: List<ProblemItem>;
   readonly problemNoList: List<ProblemNoItem>;
+  readonly problemDetail: ProblemDetail | null;
   readonly loadingProblemList: boolean;
+  readonly loadingProblemDetail: boolean;
 }
 export type TrainingState = Record<ITrainingState>;
 
 const defaultState: TrainingState = record({
   problemList: List(),
   problemNoList: List(),
-  loadingProblemList: false
-});
+  problemDetail: null,
+  loadingProblemList: false,
+  loadingProblemDetail: false
+} as ITrainingState);
 
 export const trainingReducer = handleActions<TrainingState>({
   [training.FETCH_NO_LIST_SUCCESS](state, { payload }) {
@@ -52,5 +69,16 @@ export const trainingReducer = handleActions<TrainingState>({
         }))
       )
       .set('loadingProblemList', false);
+  },
+  [training.FETCH_PROBLEM_DETAIL_START](state) {
+    return state.set('loadingProblemDetail', true);
+  },
+  [training.FETCH_PROBLEM_DETAIL_SUCCESS](state, { payload }) {
+    return state
+      .set(
+        'problemDetail',
+        record(payload.data)
+      )
+      .set('loadingProblemDetail', false);
   }
 }, defaultState);

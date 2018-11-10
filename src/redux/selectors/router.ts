@@ -1,14 +1,16 @@
 import { AppState } from '../types';
-import { Location, Pathname } from 'history';
 
-export const selectLocation = (state: AppState): Location => {
-  return state.getIn(['router', 'location']);
-};
+export const selectLocation = (state: AppState) => state
+  .get('router')
+  .get('location');
 
-export const selectPathname = (state: AppState): Pathname => {
-  return state.getIn(['router', 'location', 'pathname']);
-};
+export const selectPathname = (state: AppState) => state
+  .get('router')
+  .get('location')
+  .get('pathname');
 
-export const selectActivePage = (state: AppState): string => {
-  return selectPathname(state).split('/').slice(-1)[0];
-};
+export const selectActivePage = (state: AppState) =>
+  selectPathname(state).split('/').slice(-1)[0];
+
+export const selectProblemNo = (state: AppState) =>
+  selectPathname(state).split('/').slice(-1)[0];

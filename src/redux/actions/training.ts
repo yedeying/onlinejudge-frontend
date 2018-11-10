@@ -19,3 +19,13 @@ export const fetchProblemList = (pageId: string) => ({
     data: {}
   }
 });
+
+export const fetchProblemDetail = (problemNo: string) => ({
+  type: actionTypes.training.FETCH_PROBLEM_DETAIL,
+  payload: { problemNo },
+  [REQUEST]: {
+    url: apiUrls.training.FETCH_PROBLEM_DETAIL.replace(':problemNo', problemNo),
+    method: apiUrls.Method.GET,
+    data: {}
+  }
+});

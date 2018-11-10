@@ -6,6 +6,7 @@ import { ColumnProps } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
 
 import Loading from '../loading';
+import { Path } from '../../constants/route';
 import { AppState } from '../../redux/types';
 import { IProblemItem, ProblemItem } from '../../redux/reducers/training';
 import { selectProblemList, isProblemListLoading } from '../../redux/selectors/training';
@@ -16,7 +17,7 @@ const { PureComponent } = React;
 
 const TitleContent = (value: string, record: IProblemItem) => {
   return {
-    children: (<Link to={`/training/detail/${record.no}`}>{value}</Link>)
+    children: (<Link to={Path.TRAINING_PROBLEM.replace(':problemNo', record.no)}>{value}</Link>)
   };
 };
 
