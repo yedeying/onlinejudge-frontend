@@ -1,6 +1,6 @@
 import { List } from 'immutable';
-import { Record } from '../types';
-import { actionTypes } from '../../constants';
+import { Record } from '$types';
+import { actionTypes } from '$constants';
 import { handleActions, record } from '../utils';
 const { training } = actionTypes;
 
@@ -16,11 +16,11 @@ export interface IProblemItem {
 }
 export type ProblemItem = Record<IProblemItem>;
 
-export interface IProblemNoItem {
+export interface IPageItem {
   id: string;
-  title: string;
+  text: string;
 }
-export type ProblemNoItem = Record<IProblemNoItem>;
+export type PageItem = Record<IPageItem>;
 
 export interface IProblemDetail extends IProblemItem {
   description: string;
@@ -34,7 +34,7 @@ export type ProblemDetail = Record<IProblemDetail>;
 
 export interface ITrainingState {
   readonly problemList: List<ProblemItem>;
-  readonly problemNoList: List<ProblemNoItem>;
+  readonly pageList: List<PageItem>;
   readonly problemDetail: ProblemDetail | null;
   readonly loadingProblemList: boolean;
   readonly loadingProblemDetail: boolean;
@@ -43,17 +43,17 @@ export type TrainingState = Record<ITrainingState>;
 
 const defaultState: TrainingState = record({
   problemList: List(),
-  problemNoList: List(),
+  pageList: List(),
   problemDetail: null,
   loadingProblemList: false,
   loadingProblemDetail: false
 } as ITrainingState);
 
 export const trainingReducer = handleActions<TrainingState>({
-  [training.FETCH_NO_LIST_SUCCESS](state, { payload }) {
+  [training.FETCH_PAGE_LIST_SUCCESS](state, { payload }) {
     return state.set(
-      'problemNoList',
-      List(payload.data.map((item: IProblemNoItem) => record(item)))
+      'pageList',
+      List(payload.data.map((item: IPageItem) => record(item)))
     );
   },
   [training.FETCH_PROBLEM_LIST_START](state) {

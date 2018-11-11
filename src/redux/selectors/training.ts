@@ -1,12 +1,12 @@
-import { AppState } from '../types';
+import { AppState } from '$types';
 
 export const selectProblemList = (state: AppState) => state
   .get('training')
   .get('problemList');
 
-export const selectProblemNoList = (state: AppState) => state
+export const selectPageList = (state: AppState) => state
   .get('training')
-  .get('problemNoList');
+  .get('pageList');
 
 export const isProblemListLoading = (state: AppState) => state
   .get('training')

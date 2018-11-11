@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios';
-import { error as errorConst } from '../../constants';
+import { error as errorConst } from '$constants';
 
 const source = axios.CancelToken.source();
 

@@ -1,15 +1,17 @@
 import * as React from 'react';
-import ProblemNoList from '../problemNoList';
-import { contentWrapper } from './Dashboard.less';
+import PageList from '../pageList';
+import ContentWrapper from '../contentWrapper';
+import ProblemList from '$components/problemList';
 
 const { PureComponent } = React;
 
 class Dashboard extends PureComponent {
   render() {
     return (
-      <div className={contentWrapper}>
-        <ProblemNoList />
-      </div>
+      <ContentWrapper>
+        <PageList />
+        <ProblemList />
+      </ContentWrapper>
     );
   }
 }

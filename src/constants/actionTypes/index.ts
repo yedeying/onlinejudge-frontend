@@ -2,7 +2,7 @@ import { SUFFIX, FETCH, decorateActionType } from './util';
 
 const actionTypes: { [key: string]: { [key: string]: string } } = {
   training: {
-    ...decorateActionType('NO_LIST'),
+    ...decorateActionType('PAGE_LIST'),
     ...decorateActionType('PROBLEM_LIST'),
     ...decorateActionType('PROBLEM_DETAIL')
   },

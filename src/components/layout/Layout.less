@@ -1,5 +1,8 @@
-@contentColor: #fff;
+@import "~styles/palette";
 
 .main-content-wrapper {
-  background-color: @contentColor;
+  background-color: @backColor;
+  &:global(.ant-layout-content) {
+    min-height: 100vh;
+  }
 }

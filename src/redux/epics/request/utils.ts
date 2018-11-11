@@ -1,5 +1,5 @@
-import { Action, Request, Response, RequestAction, RequestError, ErrorAction } from '../../types';
-import { apiUrls, common, actionTypes } from '../../../constants';
+import { Action, Request, Response, RequestAction, RequestError, ErrorAction } from '$types';
+import { apiUrls, common, actionTypes } from '$constants';
 
 export function getActionTypes(action: RequestAction) {
   const startSuffix = actionTypes.suffix.START;

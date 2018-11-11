@@ -1,6 +1,6 @@
 import aliasCombineReducers from './combineReducers';
 import { Map, Record } from 'immutable';
-import { Action, ReducerMap } from './types';
+import { Action, ReducerMap } from '$types';
 
 interface AnyObject {
   [key: string]: any;

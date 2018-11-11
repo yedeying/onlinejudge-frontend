@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Router } from 'react-router';
-import { onLocationChanged } from '../../redux/actions/router';
-import { AppState } from '../../redux/types';
+import { onLocationChanged } from '$redux/actions/router';
+import { AppState } from '$redux/types';
 import { History, Location, Action } from 'history';
 
 const { PureComponent } = React;

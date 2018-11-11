@@ -3,12 +3,12 @@ import { Pathname } from 'history';
 import { connect } from 'react-redux';
 import { Layout, Menu } from 'antd';
 import classnames from 'classnames';
-import { NavKey, SubNavKey } from '../../constants/navigation';
-import { Path } from '../../constants/route';
+import { NavKey, SubNavKey } from '$constants/navigation';
+import { Path } from '$constants/route';
 import { Link } from 'react-router-dom';
 import NavItem, { NavItemProps } from './NavItem';
-import { AppState } from '../../redux/types';
-import { selectPathname } from '../../redux/selectors/router';
+import { AppState } from '$redux/types';
+import { selectPathname } from '$redux/selectors/router';
 import * as styles from './Navigationbar.less';
 
 const { PureComponent } = React;

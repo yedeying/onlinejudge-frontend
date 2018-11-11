@@ -1,6 +1,5 @@
-@wrapWidth: 1024px;
-@navColor: #001529;
-@subNavColor: #001d38;
+@import "~styles/palette";
+
 .header {
   &:global(.ant-layout-header) {
     height: auto;
@@ -31,15 +30,15 @@
 }
 
 .brand {
-  color: #fff;
+  color: @White1;
   padding: 8px;
   font-size: 20px;
   font-weight: 500;
   a {
-    color: #fff;
+    color: @White1;
     text-decoration: none !important;
     &:hover {
-      color: fade(#fff, 80%);
+      color: fade(@White1, 80%);
     }
   }
 }

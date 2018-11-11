@@ -6,12 +6,13 @@ import { ColumnProps } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
 
 import Loading from '../loading';
-import { Path } from '../../constants/route';
-import { AppState } from '../../redux/types';
-import { IProblemItem, ProblemItem } from '../../redux/reducers/training';
-import { selectProblemList, isProblemListLoading } from '../../redux/selectors/training';
-import { selectActivePage } from '../../redux/selectors/router';
-import { fetchProblemList } from '../../redux/actions/training';
+import { Path } from '$constants/route';
+import { AppState } from '$redux/types';
+import { IProblemItem, ProblemItem } from '$redux/reducers/training';
+import { selectProblemList, isProblemListLoading } from '$redux/selectors/training';
+import { selectActivePage } from '$redux/selectors/router';
+import { fetchProblemList } from '$redux/actions/training';
+import './ProblemList.less';
 
 const { PureComponent } = React;
 
@@ -44,7 +45,6 @@ const DifficulityContent = (value: string) => {
 const columns: ColumnProps<IProblemItem>[] = [{
   title: 'No',
   dataIndex: 'no',
-  sorter: (a, b) => parseInt(a.no.slice(1), 10) - parseInt(b.no.slice(1), 10),
   width: '10%',
   key: 'no'
 }, {
@@ -83,14 +83,12 @@ interface IDispatchProps {
   fetchProblemList: typeof fetchProblemList;
 }
 
-interface IProblemListProps extends IStateProps, IDispatchProps {
-  pageId: string;
-}
+interface IProblemListProps extends IStateProps, IDispatchProps {}
 
 class ProblemList extends PureComponent<IProblemListProps> {
   componentDidUpdate(prevProps: IProblemListProps) {
-    const { actionPage, pageId, fetchProblemList } = this.props;
-    if (actionPage !== prevProps.actionPage && actionPage === pageId) {
+    const { actionPage, fetchProblemList } = this.props;
+    if (actionPage !== prevProps.actionPage) {
       fetchProblemList(actionPage);
     }
   }
@@ -108,12 +106,12 @@ class ProblemList extends PureComponent<IProblemListProps> {
     }
 
     return (
-      <div>
+      <div className="content-wrapper" style={{ marginTop: 20 }}>
         <Table columns={columns}
           dataSource={problemList.toJS()}
           locale={{ filterConfirm: 'Confirm', filterReset: 'Reset' }}
-          size="middle"
-          pagination={false}
+          size="small"
+          pagination={{ pageSize: 30, size: 'middle' }}
         />
       </div>
     );

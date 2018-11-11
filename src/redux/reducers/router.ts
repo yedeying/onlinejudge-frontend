@@ -1,6 +1,6 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { record } from '../utils';
-import { Action, Record } from '../types';
+import { Action, Record } from '$types';
 import { Location as ILocation } from 'history';
 
 export type Location = Record<ILocation>;

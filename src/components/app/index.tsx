@@ -3,8 +3,8 @@ import * as PropTypes from 'prop-types';
 import { Store } from 'redux';
 import { History } from 'history';
 import { Provider } from 'react-redux';
-import AppRouter from '../../components/router';
-import Layout from '../../components/layout';
+import AppRouter from '$components/router';
+import Layout from '$components/layout';
 
 const { Component } = React;
 

@@ -1,15 +1,13 @@
 import * as React from 'react';
-import { fetchProblemDetail } from '../../redux/actions/training';
 import { connect } from 'react-redux';
-import { AppState } from '../../redux/types';
-import { selectProblemNo } from '../../redux/selectors/router';
+import { fetchProblemDetail } from '$redux/actions/training';
+import { AppState } from '$redux/types';
+import { selectProblemNo } from '$redux/selectors/router';
 import { isProblemDetailLoading, selectProblemDetail } from '$selectors/training';
 import { ProblemDetail } from '$reducers/training';
-import { InlineMath, BlockMath } from 'react-katex';
-import RemarkMathPlugin from 'remark-math';
 import Loading from '../loading';
-import * as Markdown from 'react-markdown';
-import 'katex/dist/katex.min.css';
+import Markdown from '../markdownRenderer';
+import ContentWrapper from '../contentWrapper';
 
 const { PureComponent } = React;
 
@@ -34,21 +32,17 @@ class Problem extends PureComponent<IProblemProps> {
   render() {
     const { loading, detail } = this.props;
     if (loading || !detail) {
-      return <Loading />;
+      return (
+        <ContentWrapper><Loading /></ContentWrapper>
+      );
     }
-    const markdownProps = {
-      source: detail.get('description'),
-      plugins: [
-        RemarkMathPlugin
-      ],
-      renderers: {
-        math: (props: {value: string}) =>
-          <BlockMath>{props.value}</BlockMath>,
-        inlineMath: (props: {value: string}) =>
-          <InlineMath>{props.value}</InlineMath>
-      }
-    };
-    return <Markdown {...markdownProps} />;
+    return (
+      <ContentWrapper>
+        <div className="content-wrapper" style={{ padding: 20, marginTop: 20 }}>
+          <Markdown source={detail.get('description')} />
+        </div>
+      </ContentWrapper>
+    );
   }
 }
 

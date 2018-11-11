@@ -1,0 +1,25 @@
+:global {
+  .ant-table-small > .ant-table-content > .ant-table-body {
+    margin: 0;
+  }
+
+  .ant-table-tbody > tr {
+    &:nth-child(2n + 1) td {
+      background-color: #fafafa;
+    }
+
+    td {
+      transition: none;
+    }
+  }
+
+  .ant-table-tbody > tr:hover > td {
+    background-color: #f1f2f3;
+  }
+
+  .ant-table-pagination.ant-pagination {
+    float: left;
+    margin-left: 10px;
+  }
+}
+

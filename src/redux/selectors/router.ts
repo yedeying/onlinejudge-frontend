@@ -1,4 +1,4 @@
-import { AppState } from '../types';
+import { AppState } from '$types';
 
 export const selectLocation = (state: AppState) => state
   .get('router')

@@ -1,10 +1,10 @@
-import { actionTypes, apiUrls } from '../../constants';
-import { REQUEST } from '../../constants/common';
+import { actionTypes, apiUrls } from '$constants';
+import { REQUEST } from '$constants/common';
 
-export const fetchNoList = () => ({
-  type: actionTypes.training.FETCH_NO_LIST,
+export const fetchPageList = () => ({
+  type: actionTypes.training.FETCH_PAGE_LIST,
   [REQUEST]: {
-    url: apiUrls.training.FETCH_NO_LIST,
+    url: apiUrls.training.FETCH_PAGE_LIST,
     method: apiUrls.Method.GET,
     data: {}
   }
