@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Tag, Table } from 'antd';
 import { ColumnProps } from 'antd/lib/table';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import Loading from '../loading';
 import { Path } from '$constants/route';
@@ -12,7 +13,7 @@ import { IProblemItem, ProblemItem } from '$redux/reducers/training';
 import { selectProblemList, isProblemListLoading } from '$redux/selectors/training';
 import { selectActivePage } from '$redux/selectors/router';
 import { fetchProblemList } from '$redux/actions/training';
-import './ProblemList.less';
+import * as styles from './ProblemList.less';
 
 const { PureComponent } = React;
 
@@ -101,17 +102,21 @@ class ProblemList extends PureComponent<IProblemListProps> {
   render() {
     const { problemList, isLoading } = this.props;
 
-    if (isLoading) {
-      return <Loading />;
-    }
+    const loadingCls = classNames(styles.loading, {
+      [styles.hide]: !isLoading
+    });
+    const tableCls = classNames('content-wrapper', styles.problemList);
 
     return (
-      <div className="content-wrapper" style={{ marginTop: 20 }}>
+      <div className={tableCls} style={{ marginTop: 20 }}>
+        <div className={loadingCls}>
+          <Loading />
+        </div>
         <Table columns={columns}
           dataSource={problemList.toJS()}
           locale={{ filterConfirm: 'Confirm', filterReset: 'Reset' }}
           size="small"
-          pagination={{ pageSize: 30, size: 'middle' }}
+          pagination={{ pageSize: 25, size: 'middle' }}
         />
       </div>
     );
