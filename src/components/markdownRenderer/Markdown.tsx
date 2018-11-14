@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as Markdown from 'react-markdown';
+import RemarkMathPlugin from 'remark-math';
+import { InlineMath, BlockMath } from 'react-katex';
+import * as styles from './Markdown.less';
 import 'katex/dist/katex.min.css';
-
-const RemarkMathPlugin = require('remark-math');
-const { InlineMath, BlockMath } = require('react-katex');
 
 const { PureComponent } = React;
 
@@ -25,6 +25,6 @@ export default class MarkdownRenderer extends PureComponent<{ source: string }> 
         inlineMath: (props: {value: string}) => <InlineMath math={props.value} />
       } as any
     };
-    return <Markdown {...markdownProps} />;
+    return <Markdown className={styles.markdown} {...markdownProps} />;
   }
 }
