@@ -11,17 +11,12 @@ import ContentWrapper from '../contentWrapper';
 
 const { PureComponent } = React;
 
-interface IStateProps {
+interface IProblemProps {
   problemNo: string;
   detail: ProblemDetail | null;
   loading: boolean;
-}
-
-interface IDispatchProps {
   fetchProblemDetail: typeof fetchProblemDetail;
 }
-
-interface IProblemProps extends IStateProps, IDispatchProps {}
 
 class Problem extends PureComponent<IProblemProps> {
   componentDidMount() {
@@ -46,8 +41,8 @@ class Problem extends PureComponent<IProblemProps> {
   }
 }
 
-export default connect<IStateProps, IDispatchProps, {}, AppState>(
-  state => ({
+export default connect(
+  (state: AppState) => ({
     problemNo: selectProblemNo(state),
     detail: selectProblemDetail(state),
     loading: isProblemDetailLoading(state)

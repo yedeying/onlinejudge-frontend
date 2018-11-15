@@ -7,16 +7,10 @@ import { History, Location, Action } from 'history';
 
 const { PureComponent } = React;
 
-interface IStateProps {
+interface IAppRouterProps {
   action: Action;
   location: Location;
-}
-
-interface IDispatchProps {
   onLocationChanged: typeof onLocationChanged;
-}
-
-interface IAppRouterProps extends IStateProps, IDispatchProps {
   history: History;
 }
 
@@ -83,8 +77,8 @@ class AppRouter extends PureComponent<IAppRouterProps> {
   }
 }
 
-export default connect<IStateProps, IDispatchProps, {}, AppState>(
-  state => ({
+export default connect(
+  (state: AppState) => ({
     action: state.getIn(['router', 'action']),
     location: state.getIn(['router', 'location'])
   }),

@@ -16,11 +16,9 @@ const { Header } = Layout;
 
 type NavItemOptions = NavItemProps & { key: string, floatRight?: boolean, subNav?: NavItemOptions[] };
 
-interface IStateProps {
+interface INavigationbarProps {
   pathname: Pathname;
 }
-
-interface INavigationbarProps extends IStateProps {}
 
 class Navigationbar extends PureComponent<INavigationbarProps> {
   navList: NavItemOptions[] = [{
@@ -170,8 +168,6 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
   }
 }
 
-export default connect<IStateProps, {}, {}, AppState>(
-  (state: AppState): IStateProps => ({
-    pathname: selectPathname(state)
-  })
+export default connect(
+  (state: AppState) => ({ pathname: selectPathname(state) })
 )(Navigationbar);

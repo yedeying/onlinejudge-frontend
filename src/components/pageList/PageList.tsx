@@ -14,15 +14,11 @@ import * as styles from './Page.less';
 
 const { PureComponent } = React;
 
-interface IStateProps {
+interface IPageListProps {
   pageList: List<PageItem>;
   actionPage: string;
-}
-interface IDispatchProps {
   fetchPageList: typeof fetchPageList;
 }
-
-interface IPageListProps extends IStateProps, IDispatchProps {}
 
 class PageList extends PureComponent<IPageListProps> {
   componentDidMount() {
@@ -50,8 +46,8 @@ class PageList extends PureComponent<IPageListProps> {
   }
 }
 
-export default connect<IStateProps, IDispatchProps, {}, AppState>(
-  state => ({
+export default connect(
+  (state: AppState) => ({
     pageList: selectPageList(state),
     actionPage: selectActivePage(state)
   }),

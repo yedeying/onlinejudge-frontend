@@ -74,17 +74,12 @@ const columns: ColumnProps<IProblemItem>[] = [{
   }
 }];
 
-interface IStateProps {
+interface IProblemListProps {
   problemList: List<ProblemItem>;
   actionPage: string;
   isLoading: boolean;
-}
-
-interface IDispatchProps {
   fetchProblemList: typeof fetchProblemList;
 }
-
-interface IProblemListProps extends IStateProps, IDispatchProps {}
 
 class ProblemList extends PureComponent<IProblemListProps> {
   componentDidUpdate(prevProps: IProblemListProps) {
@@ -123,8 +118,8 @@ class ProblemList extends PureComponent<IProblemListProps> {
   }
 }
 
-export default connect<IStateProps, IDispatchProps, {}, AppState>(
-  state => ({
+export default connect(
+  (state: AppState) => ({
     problemList: selectProblemList(state),
     actionPage: selectActivePage(state),
     isLoading: isProblemListLoading(state)

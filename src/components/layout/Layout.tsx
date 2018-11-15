@@ -18,7 +18,7 @@ const ProblemDashboard = Loadable({
   }
 });
 
-class AppLayout extends Component {
+export default class AppLayout extends Component {
   render() {
     return (
       <Layout>
@@ -35,5 +35,3 @@ class AppLayout extends Component {
     );
   }
 }
-
-export default AppLayout;
