@@ -4,8 +4,7 @@ import { error as errorConst } from '$constants';
 const source = axios.CancelToken.source();
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: '',
-  headers: { 'Content-Type': 'application/json' }
+  baseURL: ''
 });
 
 // interface Cancelable {

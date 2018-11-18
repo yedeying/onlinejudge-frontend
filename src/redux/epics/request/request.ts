@@ -16,7 +16,6 @@ export const fetchRequest = (action: RequestAction) => new Observable((observer:
   };
   request(requestConfig)
     .then((response: Response) => {
-      console.log(action, response, requestActions.success(action, response));
       observer.next(requestActions.success(action, response));
       observer.complete();
     })
