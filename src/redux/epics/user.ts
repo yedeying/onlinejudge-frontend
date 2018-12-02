@@ -23,12 +23,34 @@ export const loginFailedEpic = (action$: Observable<Action>) => action$.pipe(
 
 export const loginSuccessEpic = (action$: Observable<Action>) => action$.pipe(
   ofType(actionTypes.user.LOGIN_SUCCESS),
-  tap(() => history.push(Path.ROOT)),
+  tap(() => {
+    message.success('Login successfully', 1);
+    history.push(Path.ROOT);
+  }),
+  mapTo(fetchUser())
+);
+
+export const registerFailedEpic = (action$: Observable<Action>) => action$.pipe(
+  ofType(actionTypes.user.REGISTER_FAIL),
+  tap(action => {
+    message.warning(action.payload.message || 'login failed');
+  }),
+  mergeMap(() => NEVER)
+);
+
+export const registerSuccessEpic = (action$: Observable<Action>) => action$.pipe(
+  ofType(actionTypes.user.REGISTER_SUCCESS),
+  tap(() => {
+    message.success('Register successfully', 1);
+    history.push(Path.ROOT);
+  }),
   mapTo(fetchUser())
 );
 
 export const userEpic = combineEpics(
   fetchUserEpic,
   loginFailedEpic,
-  loginSuccessEpic
+  loginSuccessEpic,
+  registerFailedEpic,
+  registerSuccessEpic
 );
