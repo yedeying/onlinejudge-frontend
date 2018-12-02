@@ -1,4 +1,11 @@
+@import "~styles/palette";
+
 .footer {
+  background-color: @backColor;
   text-align: center;
   font-weight: 500;
+
+  &:global(.ant-layout-footer) {
+    background-color: @backColor;
+  }
 }

@@ -5,7 +5,9 @@ import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 import { ApplicationState } from './reducers/root';
 
 export type RequestConfig = AxiosRequestConfig;
-export type Response = AxiosResponse;
+export interface Response extends AxiosResponse {
+  code?: number;
+}
 export type RequestError = AxiosError;
 export type AppState = ApplicationState;
 export type Record<T> = AliasRecord<T>;

@@ -1,8 +1,9 @@
-import { combineEpics, Epic } from 'redux-observable';
-import { Action } from '../types';
+import { combineEpics } from 'redux-observable';
 import { startRequestEpic, requestEpic } from './request';
+import { userEpic } from './user';
 
-export const rootEpic: Epic<Action> = combineEpics(
+export const rootEpic = combineEpics(
   startRequestEpic,
-  requestEpic
+  requestEpic,
+  userEpic
 );

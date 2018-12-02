@@ -3,6 +3,7 @@ export enum NavKey {
   contests = 'contests',
   issues = 'issues',
   login = 'login',
+  logout = 'logout',
   register = 'register'
 }
 

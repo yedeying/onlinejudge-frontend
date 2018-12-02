@@ -1,8 +1,14 @@
 @import "~styles/palette";
 
+@navHeight: 46px;
+@footerHeight: 90px;
+
+:global(#main .ant-layout) {
+  display: flex;
+  min-height: 100vh;
+}
+
 .main-content-wrapper {
   background-color: @backColor;
-  &:global(.ant-layout-content) {
-    min-height: 100vh;
-  }
+  display: flex;
 }

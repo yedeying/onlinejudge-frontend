@@ -7,79 +7,102 @@ import { NavKey, SubNavKey } from '$constants/navigation';
 import { Path } from '$constants/route';
 import { Link } from 'react-router-dom';
 import NavItem, { NavItemProps } from './NavItem';
-import { AppState } from '$redux/types';
-import { selectPathname } from '$redux/selectors/router';
+import { AppState } from '$types';
+import { selectPathname, selectCurrentUser, isLogin as selectIsLogin } from '$redux/selectors';
+import { UserInfo } from '$reducers/user';
 import * as styles from './Navigationbar.less';
+import { logout } from '$actions/user';
 
 const { PureComponent } = React;
 const { Header } = Layout;
 
-type NavItemOptions = NavItemProps & { key: string, floatRight?: boolean, subNav?: NavItemOptions[] };
+type NavItemOptions = NavItemProps & {
+  key: string;
+  visible?: boolean;
+  floatRight?: boolean;
+  subNav?: NavItemOptions[];
+};
 
 interface INavigationbarProps {
   pathname: Pathname;
+  currentUser: UserInfo | null | undefined;
+  isLogin: boolean;
+  logout: typeof logout;
 }
 
 class Navigationbar extends PureComponent<INavigationbarProps> {
-  navList: NavItemOptions[] = [{
-    key: NavKey.training,
-    route: Path.TRAINING,
-    iconKey: 'user',
-    text: 'Training',
-    subNav: [{
-      key: SubNavKey.problems,
-      route: Path.TRAINING_PROBLEMS,
-      text: 'Problems'
+  getNavList(): NavItemOptions[] {
+    const { currentUser, logout } = this.props;
+    return [{
+      key: NavKey.training,
+      route: Path.TRAINING,
+      iconKey: 'user',
+      text: 'Training',
+      subNav: [{
+        key: SubNavKey.problems,
+        route: Path.TRAINING_PROBLEMS,
+        text: 'Problems'
+      }, {
+        key: SubNavKey.status,
+        route: Path.TRAINING_STATUS,
+        text: 'Status'
+      }, {
+        key: SubNavKey.ranklist,
+        route: Path.TRAINING_RANKLIST,
+        text: 'Ranklist'
+      }]
     }, {
-      key: SubNavKey.status,
-      route: Path.TRAINING_STATUS,
-      text: 'Status'
+      key: NavKey.contests,
+      route: Path.CONTESTS,
+      iconKey: 'team',
+      text: 'Contests',
+      subNav: [{
+        key: SubNavKey.problems,
+        route: Path.CONTESTS_PROBLEMS,
+        text: 'Problems'
+      }, {
+        key: SubNavKey.status,
+        route: Path.CONTESTS_STATUS,
+        text: 'Status'
+      }, {
+        key: SubNavKey.ranklist,
+        route: Path.CONTESTS_RANKLIST,
+        text: 'Ranklist'
+      }, {
+        key: SubNavKey.statistics,
+        route: Path.CONTESTS_STATISTICS,
+        text: 'Statistics'
+      }]
     }, {
-      key: SubNavKey.ranklist,
-      route: Path.TRAINING_RANKLIST,
-      text: 'Ranklist'
-    }]
-  }, {
-    key: NavKey.contests,
-    route: Path.CONTESTS,
-    iconKey: 'team',
-    text: 'Contests',
-    subNav: [{
-      key: SubNavKey.problems,
-      route: Path.CONTESTS_PROBLEMS,
-      text: 'Problems'
+      key: NavKey.issues,
+      route: Path.ISSUES,
+      iconKey: 'notification',
+      text: 'Issues'
     }, {
-      key: SubNavKey.status,
-      route: Path.CONTESTS_STATUS,
-      text: 'Status'
+      key: NavKey.register,
+      route: Path.REGISTER,
+      text: 'Register',
+      visible: currentUser === null,
+      floatRight: true
     }, {
-      key: SubNavKey.ranklist,
-      route: Path.CONTESTS_RANKLIST,
-      text: 'Ranklist'
+      key: NavKey.login,
+      route: Path.LOGIN,
+      text: 'Login',
+      visible: currentUser === null,
+      floatRight: true
     }, {
-      key: SubNavKey.statistics,
-      route: Path.CONTESTS_STATISTICS,
-      text: 'Statistics'
-    }]
-  }, {
-    key: NavKey.issues,
-    route: Path.ISSUES,
-    iconKey: 'notification',
-    text: 'Issues'
-  }, {
-    key: NavKey.register,
-    route: Path.REGISTER,
-    text: 'Register',
-    floatRight: true
-  }, {
-    key: NavKey.login,
-    route: Path.LOGIN,
-    text: 'Login',
-    floatRight: true
-  }];
+      key: NavKey.logout,
+      onClick: () => {
+        logout();
+      },
+      text: 'Logout',
+      visible: !!currentUser,
+      floatRight: true
+    }];
+  }
 
-  getNavItemProps({ route, iconKey, text }: NavItemOptions): NavItemProps {
-    return { route, iconKey, text };
+  getNavItemProps({ route, iconKey, text, onClick }: NavItemOptions): NavItemProps {
+    return { route, iconKey, text, onClick };
   }
 
   getNavItemClass({ floatRight }: NavItemOptions): string {
@@ -90,8 +113,8 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
 
   getActiveNav(): NavItemOptions | null {
     const { pathname } = this.props;
-    for (const navItem of this.navList) {
-      if (pathname.indexOf(navItem.route) === 0) {
+    for (const navItem of this.getNavList()) {
+      if (navItem.route && pathname.indexOf(navItem.route) === 0) {
         return navItem;
       }
     }
@@ -115,7 +138,7 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
       return null;
     }
     for (const navItem of activeNav.subNav) {
-      if (pathname.indexOf(navItem.route) === 0) {
+      if (navItem.route && pathname.indexOf(navItem.route) === 0) {
         return navItem;
       }
     }
@@ -139,8 +162,8 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
               mode="horizontal"
               selectedKeys={activeNav ? [activeNav.key] : []}
             >
-              {this.navList.map((nav: NavItemOptions) => (
-                <Menu.Item className={this.getNavItemClass(nav)} key={nav.key}>
+              {this.getNavList().filter(nav => nav.visible !== false).map(nav => (
+                <Menu.Item onClick={nav.onClick} className={this.getNavItemClass(nav)} key={nav.key}>
                   <NavItem {...this.getNavItemProps(nav)} />
                 </Menu.Item>
               ))}
@@ -156,7 +179,7 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
               selectedKeys={activeSubNav ? [activeSubNav.key] : []}
             >
               {subNavList.map((nav: NavItemOptions) => (
-                <Menu.Item className={this.getNavItemClass(nav)} key={nav.key}>
+                <Menu.Item onClick={nav.onClick} className={this.getNavItemClass(nav)} key={nav.key}>
                   <NavItem {...this.getNavItemProps(nav)} />
                 </Menu.Item>
               ))}
@@ -169,5 +192,10 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
 }
 
 export default connect(
-  (state: AppState) => ({ pathname: selectPathname(state) })
+  (state: AppState) => ({
+    pathname: selectPathname(state),
+    currentUser: selectCurrentUser(state),
+    isLogin: selectIsLogin(state)
+  }),
+  { logout }
 )(Navigationbar);

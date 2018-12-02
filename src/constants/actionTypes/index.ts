@@ -1,10 +1,19 @@
 import { SUFFIX, FETCH, decorateActionType } from './util';
 
-const actionTypes: { [key: string]: { [key: string]: string } } = {
+const actionTypes = {
   training: {
     ...decorateActionType('PAGE_LIST'),
     ...decorateActionType('PROBLEM_LIST'),
     ...decorateActionType('PROBLEM_DETAIL')
+  },
+  user: {
+    ...decorateActionType('USER_INFO'),
+    ...decorateActionType('LOGIN', false),
+    ...decorateActionType('LOGOUT', false),
+    ...decorateActionType('REGISTER', false)
+  },
+  common: {
+    APP_INIT: 'APP_INIT'
   },
   suffix: SUFFIX,
   prefix: {

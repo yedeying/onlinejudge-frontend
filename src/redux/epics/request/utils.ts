@@ -1,4 +1,4 @@
-import { Action, Request, Response, RequestAction, RequestError, ErrorAction } from '$types';
+import { Action, Request, Response, RequestAction, RequestError } from '$types';
 import { apiUrls, common, actionTypes } from '$constants';
 
 export function getActionTypes(action: RequestAction) {
@@ -58,9 +58,21 @@ export const requestActions = {
   success: (action: RequestAction, response: Response): Action => {
     const payload = action.payload;
     const { meta } = action;
+    let resData: { [key: string]: any } = {};
+    if (response.data && typeof response.data.code === 'number' && response.data.data != null) {
+      resData = {
+        code: response.data.code,
+        data: response.data.data
+      };
+    } else if (response.data && typeof response.data.code === 'number' && response.data.message != null) {
+      resData = {
+        code: response.data.code,
+        message: response.data.message
+      };
+    }
     return {
       type: getActionTypes(action).success,
-      payload: { ...payload, ...response },
+      payload: { ...payload, ...resData },
       meta: {
         ...meta,
         isLoading: false,
@@ -69,17 +81,24 @@ export const requestActions = {
     };
   },
 
-  fail: (action: RequestAction, error: RequestError): ErrorAction => {
-    const response = {};
+  fail: (action: RequestAction, error: RequestError): Action => {
+    let resData: { [key: string]: any } = {};
+    const { response } = error;
     const requestData = getRequestData(action);
+
+    if (response && response.data && typeof response.data.code === 'number' && response.data.message) {
+      resData = {
+        code: response.data.code,
+        message: response.data.message
+      };
+    }
 
     // 约定：
     // 注意在reducer中handle的时候我们需要去action.error里获取错误信息
     // 而在payload中拿取请求参数
     return {
       type: getActionTypes(action).fail,
-      error,
-      payload: { ...action.payload, ...requestData, ...response },
+      payload: { ...action.payload, ...requestData, ...resData },
       meta: {
         previousAction: action,
         isLoading: false,
