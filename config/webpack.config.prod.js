@@ -2,11 +2,12 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 // const WebpackVisualizerPlugin = require('webpack-visualizer-plugin');
 const project = require('./project');
 const utils = require('./utils');
 const baseWebpackConfig = require('./webpack.config.base');
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+// const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 const htmlMinify = {
   removeComments: true,
@@ -30,6 +31,12 @@ const config = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ extract: true })
   },
+  optimization: {
+    minimizer: [new TerserPlugin({
+      parallel: true,
+      sourceMap: true
+    })]
+  },
   plugins: [
     // 用于分析node_modules
     // new WebpackVisualizerPlugin({
@@ -37,28 +44,28 @@ const config = merge(baseWebpackConfig, {
     // }),
     new HtmlWebpackPlugin({
       inject: true,
-      template: project.paths.public('index.html'),
+      template: project.paths.client('index.html'),
       favicon: project.paths.favicon,
       filename: project.paths.template('index.html'),
       minify: htmlMinify,
       chunks: ['manifest', 'vendor', 'app']
     }),
-    new ParallelUglifyPlugin({
-      exclude: /\.min\.js$/,
-      sourceMap: true,
-      uglifyJS: {
-        mangle: true,
-        output: {
-          comments: false
-        },
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-          warnings: false,
-          reduce_vars: false
-        }
-      }
-    }),
+    // new ParallelUglifyPlugin({
+    //   exclude: /\.min\.js$/,
+    //   sourceMap: true,
+    //   uglifyJS: {
+    //     mangle: true,
+    //     output: {
+    //       comments: false
+    //     },
+    //     compress: {
+    //       drop_console: true,
+    //       drop_debugger: true,
+    //       warnings: false,
+    //       reduce_vars: false
+    //     }
+    //   }
+    // }),
     new webpack.SourceMapDevToolPlugin({
       filename: '[file].map'
     }),
