@@ -11,6 +11,7 @@
     "start:analyze": "npm_config_report=true node ./bin/start.js",
     "build": "node ./bin/build",
     "build:analyze": "npm_config_report=true node ./bin/build",
+    "deploy": "sh ./bin/upload.sh",
     "commit": "git-cz"
   },
   "husky": {

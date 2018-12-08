@@ -46,7 +46,7 @@ const config = merge(baseWebpackConfig, {
       inject: true,
       template: project.paths.client('index.html'),
       favicon: project.paths.favicon,
-      filename: project.paths.template('index.html'),
+      filename: project.paths.dist('index.html'),
       minify: htmlMinify,
       chunks: ['manifest', 'vendor', 'app']
     }),

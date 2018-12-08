@@ -4,7 +4,7 @@ import { AppContainer } from 'react-hot-loader';
 import store from './redux/store';
 import history from './redux/store/history';
 import App from './components/app';
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 import './styles/index.less';
 import 'antd/dist/antd.less';
 
@@ -24,4 +24,4 @@ const render = (Component: typeof React.Component) => {
 };
 
 render(App);
-registerServiceWorker();
+// registerServiceWorker();

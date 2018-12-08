@@ -22,7 +22,7 @@ const config = {
   path_base: appDirectory,
   dir_client: 'src',
   node_modules: 'node_modules',
-  dir_dist: 'output/resource',
+  dir_dist: 'output',
   dir_template: 'output/template',
   dir_public: 'public',
   dir_server: 'server',
