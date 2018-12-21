@@ -8,7 +8,7 @@ import { Path } from '$constants/route';
 import { Link } from 'react-router-dom';
 import NavItem, { NavItemProps } from './NavItem';
 import { AppState } from '$types';
-import { selectPathname, selectCurrentUser, isLogin as selectIsLogin } from '$redux/selectors';
+import { selectPathname, selectCurrentUser, isLogin as selectIsLogin } from '$selectors';
 import { UserInfo } from '$reducers/user';
 import * as styles from './Navigationbar.less';
 import { logout } from '$actions/user';

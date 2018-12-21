@@ -2,13 +2,13 @@ import * as React from 'react';
 import { List } from 'immutable';
 import { connect } from 'react-redux';
 
-import history from '$redux/store/history';
-import { PageItem } from '$redux/reducers/training';
-import { AppState } from '$redux/types';
+import history from '$store/history';
+import { PageItem } from '$reducers/training';
+import { AppState } from '$types';
 import { Path } from '$constants/route';
-import { selectPageList } from '$redux/selectors/training';
-import { selectActivePage } from '$redux/selectors/router';
-import { fetchPageList } from '$redux/actions/training';
+import { selectPageList } from '$selectors/training';
+import { selectActivePage } from '$selectors/router';
+import { fetchPageList } from '$actions/training';
 import Page from './Page';
 import * as styles from './Page.less';
 

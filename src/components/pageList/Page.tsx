@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PageItem } from '$redux/reducers/training';
+import { PageItem } from '$reducers/training';
 import * as styles from './Page.less';
 import classNames from 'classnames';
 

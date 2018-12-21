@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { fetchProblemDetail } from '$redux/actions/training';
-import { AppState } from '$redux/types';
-import { selectProblemNo } from '$redux/selectors/router';
+import { fetchProblemDetail } from '$actions/training';
+import { AppState } from '$types';
+import { selectProblemNo } from '$selectors/router';
 import { isProblemDetailLoading, selectProblemDetail } from '$selectors/training';
 import { ProblemDetail } from '$reducers/training';
 import Loading from '../loading';

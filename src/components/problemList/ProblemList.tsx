@@ -8,11 +8,11 @@ import classNames from 'classnames';
 
 import Loading from '../loading';
 import { Path } from '$constants/route';
-import { AppState } from '$redux/types';
-import { IProblemItem, ProblemItem } from '$redux/reducers/training';
-import { selectProblemList, isProblemListLoading } from '$redux/selectors/training';
-import { selectActivePage } from '$redux/selectors/router';
-import { fetchProblemList } from '$redux/actions/training';
+import { AppState } from '$types';
+import { IProblemItem, ProblemItem } from '$reducers/training';
+import { selectProblemList, isProblemListLoading } from '$selectors/training';
+import { selectActivePage } from '$selectors/router';
+import { fetchProblemList } from '$actions/training';
 import * as styles from './ProblemList.less';
 
 const { PureComponent } = React;

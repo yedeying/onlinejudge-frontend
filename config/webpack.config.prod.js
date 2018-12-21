@@ -32,9 +32,16 @@ const config = merge(baseWebpackConfig, {
     rules: utils.styleLoaders({ extract: true })
   },
   optimization: {
+    minimize: true,
     minimizer: [new TerserPlugin({
+      cache: true,
       parallel: true,
-      sourceMap: true
+      sourceMap: true,
+      terserOptions: {
+        output: {
+          comments: false
+        }
+      }
     })]
   },
   plugins: [
