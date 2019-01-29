@@ -6,6 +6,9 @@ const actionTypes = {
     ...decorateActionType('PROBLEM_LIST'),
     ...decorateActionType('PROBLEM_DETAIL')
   },
+  status: {
+    ...decorateActionType('STATUS_LIST')
+  },
   user: {
     ...decorateActionType('USER_INFO'),
     ...decorateActionType('LOGIN', false),
