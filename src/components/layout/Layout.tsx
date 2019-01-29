@@ -21,6 +21,13 @@ const ProblemDashboard = Loadable({
   }
 });
 
+const StatusDashboard = Loadable({
+  loader: () => import('../statusDashboard'),
+  loading() {
+    return <div>Loading</div>;
+  }
+});
+
 export default class AppLayout extends Component {
   componentDidMount() {
     store.dispatch(appInit());
@@ -36,6 +43,7 @@ export default class AppLayout extends Component {
           <Route exact path={Path.TRAINING_PROBLEMS} render={() => <Redirect to={Path.TRAINING_PROBLEMS_PAGE.replace(':pageId', 'A')} />} />
           <Route exact path={Path.TRAINING_PROBLEMS_PAGE} render={() => <ProblemDashboard />} />
           <Route exact path={Path.TRAINING_PROBLEM} render={() => <Problem />} />
+          <Route exact path={Path.TRAINING_STATUS} render={() => <StatusDashboard />} />
           <Route exact path={Path.LOGIN} render={() => <Login mode="login" />} />
           <Route exact path={Path.REGISTER} render={() => <Login mode="register" />} />
         </Content>
