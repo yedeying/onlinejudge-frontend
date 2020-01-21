@@ -107,7 +107,8 @@ class ProblemList extends PureComponent<IProblemListProps> {
         <div className={loadingCls}>
           <Loading />
         </div>
-        <Table columns={columns}
+        <Table
+          columns={columns}
           dataSource={problemList.toJS()}
           locale={{ filterConfirm: 'Confirm', filterReset: 'Reset' }}
           size="small"

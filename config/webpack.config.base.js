@@ -15,7 +15,7 @@ module.exports = {
     publicPath: project.served_path
   },
   resolve: {
-    modules: [project.paths.client(), project.paths.node_modules()],
+    modules: [project.paths.client(), 'node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
     alias: project.alias,
     plugins: [new TsconfigPathsPlugin({ configFile: path.join(__dirname, '../tsconfig.json') })]

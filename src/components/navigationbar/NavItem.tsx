@@ -5,7 +5,7 @@ import { Path } from '$constants/route';
 
 export interface NavItemProps {
   route?: Path;
-  onClick?: () => void;
+  handleClick?: () => void;
   text: string;
   iconKey?: string;
 }

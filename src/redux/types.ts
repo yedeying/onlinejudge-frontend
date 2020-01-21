@@ -1,7 +1,7 @@
 import { REQUEST } from '../constants/common';
 import { Record as AliasRecord } from 'immutable';
 import { Reducer as ReduxReducer } from 'redux';
-import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { AxiosRequestConfig, AxiosResponse, AxiosError, Method } from 'axios';
 import { ApplicationState } from './reducers/root';
 
 export type RequestConfig = AxiosRequestConfig;
@@ -33,7 +33,7 @@ export interface ReducerMap<T> {
 
 export interface Request {
   url: string;
-  method: string;
+  method: Method;
   data: any;
   options?: any;
 }

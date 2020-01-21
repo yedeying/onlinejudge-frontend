@@ -19,10 +19,10 @@ const isLocalhost = Boolean(
 );
 
 export default function register() {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator && process.env.PUBLIC_URL) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(
-      process.env.PUBLIC_URL!,
+      process.env.PUBLIC_URL,
       window.location.toString()
     );
     if (publicUrl.origin !== window.location.origin) {
@@ -33,7 +33,7 @@ export default function register() {
     }
 
     window.addEventListener('load', () => {
-      const swUrl = `/js/service-worker.js`;
+      const swUrl = '/js/service-worker.js';
 
       if (isLocalhost) {
         // This is running on localhost. Lets check if a service worker still exists or not.
@@ -91,9 +91,10 @@ async function checkValidServiceWorker(swUrl: string) {
     // Check if the service worker can be found. If it can't reload the page.
     const response = await fetch(swUrl);
     // Ensure service worker exists, and that we really are getting a JS file.
+    const contentType = response.headers.get('content-type');
     if (
       response.status === 404 ||
-      response.headers.get('content-type')!.indexOf('javascript') === -1
+      contentType && contentType.indexOf('javascript') === -1
     ) {
       // No service worker found. Probably a different app. Reload the page.
       const registration = await navigator.serviceWorker.ready;

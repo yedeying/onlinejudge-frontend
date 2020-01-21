@@ -6,16 +6,24 @@ function cssLoaders(options, useModule) {
   options = options || {};
 
   const cssLoader = {
-    loader: useModule ? 'typings-for-css-modules-loader' : 'css-loader',
+    loader: 'css-loader',
     options: {
-      modules: useModule,
-      namedExport: true,
-      localIdentName: '[name]__[local]-[hash:base64:8]',
-      minimize: process.env.NODE_ENV === 'production' && { safe: true },
       sourceMap: options.sourceMap,
-      camelCase: true,
-      importLoaders: 1
+      localsConvention: 'camelCaseOnly',
+      importLoaders: 1,
+      esModule: true
     }
+  };
+
+  if (useModule) {
+    cssLoader.options.modules = {
+      mode: 'local',
+      localIdentName: '[name]__[local]-[hash:base64:8]'
+    };
+  }
+
+  const cssTypingLoader = {
+    loader: '@teamsupercell/typings-for-css-modules-loader'
   };
 
   const postcssLoader = {
@@ -26,12 +34,6 @@ function cssLoaders(options, useModule) {
       plugins: () => [
         // PostcssFlexbugsFixes,
         Autoprefixer({
-          browsers: [
-            '>1%',
-            'last 4 versions',
-            'Firefox ESR',
-            'not ie < 9' // React doesn't support IE8 anyway
-          ],
           flexbox: 'no-2009'
         })
       ]
@@ -40,21 +42,21 @@ function cssLoaders(options, useModule) {
 
   // generate loader string to be used with extract text plugin
   function generateLoaders(loader, loaderOptions) {
-    const loaders = [cssLoader, postcssLoader];
-    if (loader) {
-      loaders.push({
+    const loaders = [
+      cssLoader,
+      useModule ? cssTypingLoader : null,
+      postcssLoader,
+      loader ? {
         loader,
         options: Object.assign({
           sourceMap: options.sourceMap,
           javascriptEnabled: true
         }, loaderOptions)
-      });
-    }
+      } : null
+    ].filter(loader => loader);
 
     cssLoader.options.importLoaders = loaders.length - 1;
 
-    // Extract CSS when that option is specified
-    // (which is the case during production build)
     if (options.extract) {
       return ExtractTextPlugin.extract({
         use: loaders,

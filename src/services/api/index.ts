@@ -24,10 +24,7 @@ export const request = (requestConfig: AxiosRequestConfig): Promise<AxiosRespons
       if (e.code === errorConst.StatusCode.LOGIN_REQUIRED) {
         window.location.reload();
       }
-      if (axios.isCancel(e)) {
-        return Promise.reject(e);
-      }
-      return Promise.reject(e);
+      throw e;
     }
   );
   return requestInstance;

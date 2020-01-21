@@ -92,7 +92,7 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
       floatRight: true
     }, {
       key: NavKey.logout,
-      onClick: () => {
+      handleClick: () => {
         logout();
       },
       text: 'Logout',
@@ -101,8 +101,8 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
     }];
   }
 
-  getNavItemProps({ route, iconKey, text, onClick }: NavItemOptions): NavItemProps {
-    return { route, iconKey, text, onClick };
+  getNavItemProps({ route, iconKey, text, handleClick }: NavItemOptions): NavItemProps {
+    return { route, iconKey, text, handleClick };
   }
 
   getNavItemClass({ floatRight }: NavItemOptions): string {
@@ -163,29 +163,31 @@ class Navigationbar extends PureComponent<INavigationbarProps> {
               selectedKeys={activeNav ? [activeNav.key] : []}
             >
               {this.getNavList().filter(nav => nav.visible !== false).map(nav => (
-                <Menu.Item onClick={nav.onClick} className={this.getNavItemClass(nav)} key={nav.key}>
+                <Menu.Item onClick={nav.handleClick} className={this.getNavItemClass(nav)} key={nav.key}>
                   <NavItem {...this.getNavItemProps(nav)} />
                 </Menu.Item>
               ))}
             </Menu>
           </div>
         </div>
-        {subNavList.length > 0 && <div className={styles.subNav}>
-          <div className={styles.headerWrapper}>
-            <Menu
-              className={styles.subMenu}
-              theme="dark"
-              mode="horizontal"
-              selectedKeys={activeSubNav ? [activeSubNav.key] : []}
-            >
-              {subNavList.map((nav: NavItemOptions) => (
-                <Menu.Item onClick={nav.onClick} className={this.getNavItemClass(nav)} key={nav.key}>
-                  <NavItem {...this.getNavItemProps(nav)} />
-                </Menu.Item>
-              ))}
-            </Menu>
+        {subNavList.length > 0 && (
+          <div className={styles.subNav}>
+            <div className={styles.headerWrapper}>
+              <Menu
+                className={styles.subMenu}
+                theme="dark"
+                mode="horizontal"
+                selectedKeys={activeSubNav ? [activeSubNav.key] : []}
+              >
+                {subNavList.map((nav: NavItemOptions) => (
+                  <Menu.Item onClick={nav.handleClick} className={this.getNavItemClass(nav)} key={nav.key}>
+                    <NavItem {...this.getNavItemProps(nav)} />
+                  </Menu.Item>
+                ))}
+              </Menu>
+            </div>
           </div>
-        </div>}
+        )}
       </Header>
     );
   }

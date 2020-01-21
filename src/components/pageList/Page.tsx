@@ -17,8 +17,10 @@ export default class Page extends PureComponent<IPageProps> {
     const cls = classNames(styles.pageItem, {
       [styles.active]: selected
     });
-    return (<span className={cls} onClick={() => onChange(page)}>
-      {page.get('text')}
-    </span>);
+    return (
+      <span className={cls} onClick={() => onChange(page)}>
+        {page.get('text')}
+      </span>
+    );
   }
 }

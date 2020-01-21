@@ -12,6 +12,7 @@ interface IAppRouterProps {
   location: Location;
   onLocationChanged: typeof onLocationChanged;
   history: History;
+  children: React.ReactElement;
 }
 
 class AppRouter extends PureComponent<IAppRouterProps> {
@@ -71,7 +72,7 @@ class AppRouter extends PureComponent<IAppRouterProps> {
 
     return (
       <Router history={history}>
-        { children }
+        {children}
       </Router>
     );
   }

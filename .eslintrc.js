@@ -3,9 +3,9 @@ module.exports = {
     'standard-ye'
   ],
   // eslint currently not support extends in overrids, so that use this hacking
-  overrides: Object.assign({
+  overrides: [Object.assign({
     files: ['**/*.ts', '**/*.tsx'],
-  }, require('eslint-config-standard-ye-ts')),
+  }, require('eslint-config-standard-ye-ts'))],
   rules: {
     'no-mixed-operators': 'off'
   }
