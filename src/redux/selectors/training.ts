@@ -8,6 +8,10 @@ export const selectPageList = (state: AppState) => state
   .get('training')
   .get('pageList');
 
+export const selectStatusList = (state: AppState) => state
+  .get('training')
+  .get('statusList');
+
 export const isProblemListLoading = (state: AppState) => state
   .get('training')
   .get('loadingProblemList');
@@ -19,3 +23,7 @@ export const isProblemDetailLoading = (state: AppState) => state
 export const selectProblemDetail = (state: AppState) => state
   .get('training')
   .get('problemDetail');
+
+export const isStatusListLoading = (state: AppState) => state
+  .get('training')
+  .get('loadingStatusList');

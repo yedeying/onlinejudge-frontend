@@ -12,7 +12,8 @@ export const USER = `${API_BASE}/user`;
 export const training = {
   FETCH_PAGE_LIST: `${TRAINING}/pageList`,
   FETCH_PROBLEM_LIST: `${TRAINING}/problemList/:pageId`,
-  FETCH_PROBLEM_DETAIL: `${TRAINING}/problem/:problemNo`
+  FETCH_PROBLEM_DETAIL: `${TRAINING}/problem/:problemNo`,
+  FETCH_STATUS_LIST: `${TRAINING}/statusList`
 };
 
 export const user = {

@@ -6,6 +6,7 @@ import { Path } from '$constants/route';
 import Navigationbar from '../navigationbar';
 import Footer from '../footer';
 import Problem from '../problem';
+import StatusList from '../statusList';
 import Login from '../login';
 import { mainContentWrapper } from './Layout.less';
 import { appInit } from '$actions';
@@ -36,6 +37,7 @@ export default class AppLayout extends Component {
           <Route exact path={Path.TRAINING_PROBLEMS} render={() => <Redirect to={Path.TRAINING_PROBLEMS_PAGE.replace(':pageId', 'A')} />} />
           <Route exact path={Path.TRAINING_PROBLEMS_PAGE} render={() => <ProblemDashboard />} />
           <Route exact path={Path.TRAINING_PROBLEM} render={() => <Problem />} />
+          <Route exact path={Path.TRAINING_STATUS} render={() => <StatusList />} />
           <Route exact path={Path.LOGIN} render={() => <Login mode="login" />} />
           <Route exact path={Path.REGISTER} render={() => <Login mode="register" />} />
         </Content>

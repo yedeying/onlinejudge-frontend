@@ -1,0 +1,45 @@
+.status-list {
+  position: relative;
+  :global {
+    .ant-table-small {
+      > .ant-table-content > .ant-table-body {
+        margin: 0;
+
+        .ant-table-tbody > tr:nth-child(2n + 1) td {
+          background-color: #fafafa;
+        }
+
+        .ant-table-tbody, .ant-table-thead {
+          tr:hover > td {
+            background-color: #f1f2f3;
+          }
+
+          td, th {
+            transition: none;
+            padding: 8px 12px;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
+    .ant-table-pagination.ant-pagination {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
+
+.loading {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.disappear {
+  display: none;
+}
