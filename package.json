@@ -155,7 +155,7 @@
     "lodash": "^4.17.15",
     "lodash-decorators": "^6.0.1",
     "luxon": "^1.21.3",
-    "qs": "^6.9.1",
+    "qs": "^6.9.7",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-katex": "^2.0.2",
